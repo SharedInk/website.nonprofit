@@ -1,806 +1,389 @@
 <!doctype html>
 <html lang="en-NZ">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>insert later</title>
-  <meta name="description" content="insert later" />
-  <meta property="og:title" content="insert later" />
-  <meta property="og:description" content="insert later" />
-  <meta property="og:type" content="website" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>insert later</title>
 
-  <style>
-    :root{
-      /* Pale blue, orange, white theme */
-      --bg: #f7fbff;
-      --surface: rgba(255,255,255,.85);
-      --card: rgba(255,255,255,.92);
-      --text: #0b1b2a;
-      --muted: rgba(11,27,42,.65);
+<style>
+:root{
+  --orange:#ff8a3d;
+  --orange2:#ff9f5a;
+  --blue:#8fd0ff;
+  --blue2:#3fb2ff;
+  --white:#ffffff;
 
-      --blue: #cfe9ff;     /* pale blue */
-      --blue2:#8fd0ff;     /* stronger pale blue */
-      --orange: #ffb36b;   /* soft orange */
-      --orange2:#ff8a3d;   /* stronger orange */
+  --text:#ffffff;
+  --muted:rgba(255,255,255,.85);
+  --border:rgba(255,255,255,.25);
+  --shadow:0 20px 50px rgba(0,0,0,.18);
+  --radius:18px;
+}
 
-      --border: rgba(11,27,42,.12);
-      --shadow: 0 18px 45px rgba(11,27,42,.12);
-      --radius: 18px;
-    }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  background:linear-gradient(180deg,var(--orange),var(--orange2));
+  color:var(--text);
+  line-height:1.6;
+}
+.container{max-width:1100px;margin:0 auto;padding:0 18px}
+a{text-decoration:none;color:inherit}
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: var(--text);
-      background:
-        radial-gradient(900px 600px at 10% -10%, rgba(143,208,255,.45), transparent 60%),
-        radial-gradient(900px 600px at 90% 10%, rgba(255,179,107,.40), transparent 60%),
-        radial-gradient(900px 650px at 30% 120%, rgba(207,233,255,.50), transparent 65%),
-        var(--bg);
-      line-height: 1.55;
-    }
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+.logo{
+  width:40px;height:40px;border-radius:12px;
+  background:linear-gradient(135deg,var(--blue),var(--white));
+  display:grid;place-items:center;
+  font-weight:900;color:var(--orange);
+}
+nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0}
+nav a{padding:8px 10px;border-radius:999px}
+nav a:hover{background:rgba(255,255,255,.2)}
 
-    a{color:inherit}
-    .container{max-width:1100px; margin:0 auto; padding:0 18px}
+.btn{
+  padding:10px 16px;border-radius:999px;
+  border:1px solid var(--border);
+  background:var(--white);
+  color:var(--orange);
+  font-weight:800;
+}
+.btn.primary{
+  background:var(--blue);
+  color:white;
+}
+.btn:hover{opacity:.9}
 
-    /* Pills + buttons */
-    .pill{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:8px 12px; border:1px solid var(--border);
-      border-radius:999px; color:var(--muted);
-      background: rgba(255,255,255,.65);
-      backdrop-filter: blur(8px);
-      font-size: 14px;
-    }
-    .dot{width:8px;height:8px;border-radius:999px;background: var(--orange2); box-shadow:0 0 18px rgba(255,138,61,.35)}
+/* HERO */
+.hero{padding:70px 0;text-align:left}
+h1{font-size:48px;margin:10px 0}
+.lead{max-width:650px}
 
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 16px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.70);
-      color: var(--text);
-      text-decoration:none;
-      box-shadow: 0 10px 22px rgba(11,27,42,.10);
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      font-weight: 700;
-    }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.88); border-color: rgba(11,27,42,.18)}
-    .btn.primary{
-      border: none;
-      background: linear-gradient(90deg, var(--blue2), var(--orange2));
-      color: #082033;
-    }
-    .btn.primary:hover{
-      background: linear-gradient(90deg, rgba(143,208,255,.95), rgba(255,138,61,.95));
-    }
-    .btn.small{padding:10px 14px; font-weight: 750; font-size: 14px}
+/* SECTION */
+section{padding:60px 0}
+.card{
+  background:rgba(255,255,255,.15);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow:var(--shadow);
+}
 
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(14px);
-      background: rgba(247,251,255,.78);
-      border-bottom: 1px solid rgba(11,27,42,.10);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 0;
-      position:relative;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      text-decoration:none;
-      font-weight: 900;
-      letter-spacing: .2px;
-    }
-    .logo{
-      width:36px;height:36px;border-radius:12px;
-      background: linear-gradient(135deg, var(--blue2), var(--orange2));
-      box-shadow: 0 18px 36px rgba(11,27,42,.10);
-      display:grid; place-items:center;
-      color:#082033;
-      font-weight: 950;
-    }
-    nav ul{list-style:none; padding:0; margin:0; display:flex; gap:14px; align-items:center}
-    nav a{
-      text-decoration:none;
-      color: var(--muted);
-      padding:10px 10px;
-      border-radius: 999px;
-      transition: background .15s ease, color .15s ease;
-      font-weight: 750;
-      font-size: 14px;
-    }
-    nav a:hover{background: rgba(255,255,255,.70); color: var(--text)}
-    .nav-cta{display:flex; gap:10px; align-items:center}
-    .mobile-toggle{
-      display:none;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.75);
-      color: var(--text);
-      border-radius: 12px;
-      padding:10px 12px;
-      font-weight:800;
-    }
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 
-    /* Hero */
-    .hero{padding:52px 0 24px}
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:22px;
-      align-items:stretch;
-    }
-    h1{
-      margin:14px 0 10px;
-      font-size: clamp(34px, 4.2vw, 54px);
-      line-height:1.05;
-      letter-spacing:-.6px;
-    }
-    .lead{
-      color: var(--muted);
-      font-size: 16.5px;
-      max-width: 58ch;
-      margin: 0 0 18px;
-    }
-    .hero-card{
-      background: var(--surface);
-      border: 1px solid rgba(11,27,42,.10);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .hero-card::before{
-      content:"";
-      position:absolute; inset:-120px -120px auto auto;
-      width:260px; height:260px;
-      background: radial-gradient(circle at center, rgba(255,179,107,.55), transparent 60%);
-      transform: rotate(10deg);
-      pointer-events:none;
-    }
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.profile{display:flex;gap:14px}
+.avatar{
+  width:60px;height:60px;border-radius:18px;
+  background:linear-gradient(135deg,var(--white),var(--blue));
+  display:grid;place-items:center;
+  font-weight:900;color:var(--orange);
+}
+.name{font-weight:900;margin:0}
+.role{margin:4px 0 8px;color:var(--muted);font-size:14px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{
+  background:var(--white);
+  color:var(--orange);
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+}
 
-    /* Sections */
-    section{padding:38px 0}
-    .section-title{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:12px; margin-bottom: 16px;
-    }
-    h2{margin:0; font-size: 26px; letter-spacing:-.3px}
-    .sub{color:var(--muted); margin:0; max-width: 70ch}
+.qual-title{
+  margin:14px 0 6px;
+  font-weight:900;
+}
+.qual-list{
+  margin:0;
+  padding-left:18px;
+  color:var(--muted);
+}
 
-    .grid-3{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
-    .card{
-      background: var(--card);
-      border: 1px solid rgba(11,27,42,.10);
-      border-radius: var(--radius);
-      padding:16px;
-      box-shadow: 0 12px 26px rgba(11,27,42,.10);
-    }
-    .card h3{margin:0 0 6px; font-size: 16.5px}
-    .card p{margin:0; color: var(--muted); font-size: 14.5px}
+/* FOOTER */
+footer{
+  padding:40px 0;
+  border-top:1px solid var(--border);
+  text-align:center;
+  color:var(--muted);
+}
 
-    /* Stats */
-    .stats{
-      display:grid; grid-template-columns: repeat(2, 1fr);
-      gap:12px; margin-top: 12px;
-    }
-    .stat{
-      border:1px solid rgba(11,27,42,.10);
-      border-radius: 16px;
-      padding:12px;
-      background: rgba(207,233,255,.35);
-    }
-    .stat:nth-child(2), .stat:nth-child(4){
-      background: rgba(255,179,107,.25);
-    }
-    .stat .k{font-size: 20px; font-weight: 950}
-    .stat .t{color: var(--muted); font-size: 13px; margin-top: 2px}
-
-    /* Team */
-    .team-grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
-    .profile{display:flex; gap:12px; align-items:flex-start}
-    .avatar{
-      width:56px; height:56px; border-radius: 18px;
-      background: linear-gradient(135deg, rgba(143,208,255,.95), rgba(255,138,61,.90));
-      border: 1px solid rgba(11,27,42,.12);
-      display:grid; place-items:center;
-      color:#082033;
-      font-weight: 950;
-      flex: 0 0 auto;
-    }
-    .profile .name{font-weight: 950; margin:0; font-size: 16px}
-    .profile .role{margin:2px 0 8px; color: var(--muted); font-size: 13.5px}
-    .tags{display:flex; flex-wrap:wrap; gap:8px}
-    .tag{
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(11,27,42,.12);
-      background: rgba(255,255,255,.75);
-      color: rgba(11,27,42,.85);
-      font-size: 12.5px;
-      font-weight: 750;
-    }
-    .links{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
-    .link{
-      color: var(--muted);
-      text-decoration:none;
-      font-size: 13.5px;
-      border-bottom: 1px dashed rgba(11,27,42,.28);
-      padding-bottom: 1px;
-    }
-    .link:hover{color:var(--text)}
-
-    /* FAQ */
-    details{
-      border:1px solid rgba(11,27,42,.10);
-      border-radius: 16px;
-      padding:12px 14px;
-      background: rgba(255,255,255,.80);
-    }
-    details summary{cursor:pointer; font-weight: 900}
-    details p{margin:10px 0 0; color: var(--muted)}
-
-    /* Contact form */
-    form{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-      margin-top: 12px;
-    }
-    label{font-size: 13px; color: rgba(11,27,42,.88); font-weight: 850}
-    input, textarea, select{
-      width:100%;
-      border-radius: 14px;
-      padding:12px 12px;
-      border:1px solid rgba(11,27,42,.14);
-      background: rgba(255,255,255,.85);
-      color: var(--text);
-      outline:none;
-      margin-top:6px;
-    }
-    textarea{min-height: 120px; resize: vertical}
-    .full{grid-column: 1 / -1}
-    .note{color: var(--muted); font-size: 13px; margin-top: 8px}
-
-    footer{
-      padding:28px 0 40px;
-      border-top: 1px solid rgba(11,27,42,.10);
-      color: rgba(11,27,42,.70);
-    }
-    .footer-grid{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
-    .tiny{font-size: 12.5px; color: rgba(11,27,42,.60)}
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px; border-radius: 999px;
-      border: 1px solid rgba(11,27,42,.10);
-      background: rgba(255,255,255,.80);
-    }
-
-    /* Responsive */
-    @media (max-width: 900px){
-      .hero-grid{grid-template-columns: 1fr}
-      .grid-3{grid-template-columns: 1fr}
-      .team-grid{grid-template-columns: 1fr}
-      form{grid-template-columns: 1fr}
-      nav ul{display:none}
-      .mobile-toggle{display:inline-flex}
-      .nav.open nav ul{
-        display:flex;
-        position:absolute;
-        left:0; right:0; top:64px;
-        flex-direction:column;
-        gap:6px;
-        padding:10px;
-        border-radius: 18px;
-        background: rgba(247,251,255,.95);
-        border: 1px solid rgba(11,27,42,.10);
-        box-shadow: var(--shadow);
-      }
-      nav a{width:100%; text-align:left}
-    }
-  </style>
+@media(max-width:900px){
+  .grid-3,.team-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 
 <body>
-  <header>
-    <div class="container">
-      <div class="nav" id="nav">
-        <a class="brand" href="#top" aria-label="insert later">
-          <div class="logo">IL</div>
-          <span>insert later</span>
-        </a>
 
-        <nav aria-label="insert later">
-          <ul>
-            <li><a href="#programmes">insert later</a></li>
-            <li><a href="#how">insert later</a></li>
-            <li><a href="#team">insert later</a></li>
-            <li><a href="#faq">insert later</a></li>
-            <li><a href="#contact">insert later</a></li>
-          </ul>
-        </nav>
-
-        <div class="nav-cta">
-          <button class="mobile-toggle" id="menuBtn" aria-label="insert later">insert later</button>
-          <a class="btn small" href="#contact">insert later</a>
-          <a class="btn small primary" href="#donate">insert later</a>
-        </div>
-      </div>
+<header>
+  <div class="container nav">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="logo">IL</div>
+      <strong>insert later</strong>
     </div>
-  </header>
+    <nav>
+      <ul>
+        <li><a href="#programmes">insert later</a></li>
+        <li><a href="#team">insert later</a></li>
+        <li><a href="#contact">insert later</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-  <main id="top">
-    <!-- HERO -->
-    <div class="container hero">
-      <div class="hero-grid">
-        <div>
-          <span class="pill"><span class="dot"></span> insert later</span>
-          <h1>insert later</h1>
-          <p class="lead">insert later</p>
+<main>
 
-          <div class="hero-actions" style="display:flex; gap:12px; flex-wrap:wrap;">
-            <a class="btn primary" href="#contact">insert later</a>
-            <a class="btn" href="#programmes">insert later</a>
-            <a class="btn" href="#team">insert later</a>
-          </div>
+<section class="hero container">
+  <h1>insert later</h1>
+  <p class="lead">insert later</p>
+  <div style="display:flex;gap:12px;margin-top:18px;">
+    <a class="btn primary" href="#contact">insert later</a>
+    <a class="btn" href="#team">insert later</a>
+  </div>
+</section>
 
-          <p class="note" style="margin-top:12px;">insert later</p>
-        </div>
+<section id="programmes">
+  <div class="container grid-3">
+    <div class="card"><h3>insert later</h3><p>insert later</p></div>
+    <div class="card"><h3>insert later</h3><p>insert later</p></div>
+    <div class="card"><h3>insert later</h3><p>insert later</p></div>
+  </div>
+</section>
 
-        <div class="hero-card" role="region" aria-label="insert later">
-          <h3 style="margin:0 0 8px; font-size: 18px;">insert later</h3>
-          <div class="grid-3" style="margin-top:10px;">
-            <div class="card">
-              <h3>insert later</h3>
-              <p>insert later</p>
-            </div>
-            <div class="card">
-              <h3>insert later</h3>
-              <p>insert later</p>
-            </div>
-            <div class="card">
-              <h3>insert later</h3>
-              <p>insert later</p>
-            </div>
-          </div>
+<section id="team">
+<div class="container">
+<h2>insert later</h2>
 
-          <div class="stats">
-            <div class="stat">
-              <div class="k">insert later</div>
-              <div class="t">insert later</div>
-            </div>
-            <div class="stat">
-              <div class="k">insert later</div>
-              <div class="t">insert later</div>
-            </div>
-            <div class="stat">
-              <div class="k">insert later</div>
-              <div class="t">insert later</div>
-            </div>
-            <div class="stat">
-              <div class="k">insert later</div>
-              <div class="t">insert later</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="team-grid">
 
-    <!-- PROGRAMMES -->
-    <section id="programmes">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>insert later</h2>
-            <p class="sub">insert later</p>
-          </div>
-        </div>
+<!-- AARNA -->
+<div class="card">
+<div class="profile">
+<div class="avatar">AA</div>
+<div>
+<p class="name">Aarna</p>
+<p class="role">insert later</p>
+<div class="tags">
+<span class="tag">Tech</span>
+<span class="tag">Science</span>
+</div>
+<p class="qual-title">My Qualifications</p>
+<ul class="qual-list">
+<li>insert later</li>
+<li>insert later</li>
+<li>insert later</li>
+</ul>
+</div>
+</div>
+</div>
 
-        <div class="grid-3">
-          <div class="card">
-            <h3>insert later</h3>
-            <p>insert later</p>
-          </div>
-          <div class="card">
-            <h3>insert later</h3>
-            <p>insert later</p>
-          </div>
-          <div class="card">
-            <h3>insert later</h3>
-            <p>insert later</p>
-          </div>
-        </div>
+<!-- ALYSSA -->
+<div class="card">
+<div class="profile">
+<div class="avatar">AL</div>
+<div>
+<p class="name">Alyssa</p>
+<p class="role">insert later</p>
+<div class="tags">
+<span class="tag">Chess</span>
+<span class="tag">Music Theory</span>
+<span class="tag">French</span>
+<span class="tag">Physics</span>
+</div>
+<p class="qual-title">My Qualifications</p>
+<ul class="qual-list">
+<li>insert later</li>
+<li>insert later</li>
+<li>insert later</li>
+</ul>
+</div>
+</div>
+</div>
 
-        <div class="card" style="margin-top:14px;">
-          <h3 style="margin:0 0 6px;">insert later</h3>
-          <p style="margin:0; color:var(--muted);">insert later</p>
-        </div>
-      </div>
-    </section>
+<!-- BELLA -->
+<div class="card">
+<div class="profile">
+<div class="avatar">BE</div>
+<div>
+<p class="name">Bella</p>
+<p class="role">insert later</p>
+<div class="tags">
+<span class="tag">Math (Competition)</span>
+<span class="tag">Chess</span>
+</div>
+<p class="qual-title">My Qualifications</p>
+<ul class="qual-list">
+<li>insert later</li>
+<li>insert later</li>
+<li>insert later</li>
+</ul>
+</div>
+</div>
+</div>
 
-    <!-- HOW IT WORKS -->
-    <section id="how">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>insert later</h2>
-            <p class="sub">insert later</p>
-          </div>
-        </div>
+<!-- CHERISE -->
+<div class="card">
+<div class="profile">
+<div class="avatar">CH</div>
+<div>
+<p class="name">Cherise</p>
+<p class="role">insert later</p>
+<div class="tags">
+<span class="tag">Science</span>
+<span class="tag">Spanish</span>
+<span class="tag">Biology</span>
+</div>
+<p class="qual-title">My Qualifications</p>
+<ul class="qual-list">
+<li>insert later</li>
+<li>insert later</li>
+<li>insert later</li>
+</ul>
+</div>
+</div>
+</div>
 
-        <div class="grid-3">
-          <div class="card">
-            <h3>insert later</h3>
-            <p>insert later</p>
-          </div>
-          <div class="card">
-            <h3>insert later</h3>
-            <p>insert later</p>
-          </div>
-          <div class="card">
-            <h3>insert later</h3>
-            <p>insert later</p>
-          </div>
-        </div>
+<!-- IABELLA -->
+<div class="card">
+<div class="profile">
+<div class="avatar">IA</div>
+<div>
+<p class="name">Iabella</p>
+<p class="role">insert later</p>
+<div class="tags">
+<span class="tag">English</span>
+<span class="tag">Math</span>
+<span class="tag">Science</span>
+<span class="tag">Speech</span>
+</div>
+<p class="qual-title">My Qualifications</p>
+<ul class="qual-list">
+<li>insert later</li>
+<li>insert later</li>
+<li>insert later</li>
+</ul>
+</div>
+</div>
+</div>
 
-        <div class="card" style="margin-top:14px;">
-          <h3 style="margin:0 0 6px;">insert later</h3>
-          <p style="margin:0; color:var(--muted);">insert later</p>
-        </div>
-      </div>
-    </section>
+<!-- FIONA -->
+<div class="card">
+<div class="profile">
+<div class="avatar">FI</div>
+<div>
+<p class="name">Fiona</p>
+<p class="role">insert later</p>
+<div class="tags">
+<span class="tag">Chinese</span>
+<span class="tag">History</span>
+<span class="tag">English</span>
+</div>
+<p class="qual-title">My Qualifications</p>
+<ul class="qual-list">
+<li>insert later</li>
+<li>insert later</li>
+<li>insert later</li>
+</ul>
+</div>
+</div>
+</div>
 
-    <!-- TEAM -->
-    <section id="team">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>insert later</h2>
-            <p class="sub">insert later</p>
-          </div>
-          <a class="btn small" href="#contact">insert later</a>
-        </div>
+<!-- LISA -->
+<div class="card">
+<div class="profile">
+<div class="avatar">LI</div>
+<div>
+<p class="name">Lisa</p>
+<p class="role">insert later</p>
+<div class="tags">
+<span class="tag">English</span>
+<span class="tag">Speech</span>
+<span class="tag">French</span>
+<span class="tag">Science</span>
+</div>
+<p class="qual-title">My Qualifications</p>
+<ul class="qual-list">
+<li>insert later</li>
+<li>insert later</li>
+<li>insert later</li>
+</ul>
+</div>
+</div>
+</div>
 
-        <div class="team-grid">
-          <!-- NOTE: Names must stay. All other text = insert later. -->
+<!-- LIZ -->
+<div class="card">
+<div class="profile">
+<div class="avatar">LZ</div>
+<div>
+<p class="name">Liz</p>
+<p class="role">insert later</p>
+<div class="tags">
+<span class="tag">Science</span>
+<span class="tag">Art</span>
+</div>
+<p class="qual-title">My Qualifications</p>
+<ul class="qual-list">
+<li>insert later</li>
+<li>insert later</li>
+<li>insert later</li>
+</ul>
+</div>
+</div>
+</div>
 
-          <div class="card"><div class="profile">
-            <div class="avatar" aria-hidden="true">AA</div>
-            <div>
-              <p class="name">Aarna</p>
-              <p class="role">insert later</p>
-              <p style="margin:0; color:var(--muted); font-size:14px;">insert later</p>
-              <div class="tags" style="margin-top:10px;">
-                <span class="tag">insert later</span><span class="tag">insert later</span><span class="tag">insert later</span>
-              </div>
-              <div class="links">
-                <a class="link" href="#" title="insert later">insert later</a>
-                <a class="link" href="#" title="insert later">insert later</a>
-              </div>
-            </div>
-          </div></div>
+<!-- NATALIE -->
+<div class="card">
+<div class="profile">
+<div class="avatar">NA</div>
+<div>
+<p class="name">Natalie</p>
+<p class="role">insert later</p>
+<div class="tags">
+<span class="tag">Drama</span>
+<span class="tag">Biology</span>
+<span class="tag">Admin</span>
+</div>
+<p class="qual-title">My Qualifications</p>
+<ul class="qual-list">
+<li>insert later</li>
+<li>insert later</li>
+<li>insert later</li>
+</ul>
+</div>
+</div>
+</div>
 
-          <div class="card"><div class="profile">
-            <div class="avatar" aria-hidden="true">AL</div>
-            <div>
-              <p class="name">Alyssa</p>
-              <p class="role">insert later</p>
-              <p style="margin:0; color:var(--muted); font-size:14px;">insert later</p>
-              <div class="tags" style="margin-top:10px;">
-                <span class="tag">insert later</span><span class="tag">insert later</span><span class="tag">insert later</span>
-              </div>
-              <div class="links">
-                <a class="link" href="#" title="insert later">insert later</a>
-                <a class="link" href="#" title="insert later">insert later</a>
-              </div>
-            </div>
-          </div></div>
+</div>
+</div>
+</section>
 
-          <div class="card"><div class="profile">
-            <div class="avatar" aria-hidden="true">BE</div>
-            <div>
-              <p class="name">Bella</p>
-              <p class="role">insert later</p>
-              <p style="margin:0; color:var(--muted); font-size:14px;">insert later</p>
-              <div class="tags" style="margin-top:10px;">
-                <span class="tag">insert later</span><span class="tag">insert later</span><span class="tag">insert later</span>
-              </div>
-              <div class="links">
-                <a class="link" href="#" title="insert later">insert later</a>
-                <a class="link" href="#" title="insert later">insert later</a>
-              </div>
-            </div>
-          </div></div>
+<section id="contact">
+<div class="container">
+<h2>insert later</h2>
+<div class="card">
+<p>insert later</p>
+<a class="btn primary" href="mailto:insert later">insert later</a>
+</div>
+</div>
+</section>
 
-          <div class="card"><div class="profile">
-            <div class="avatar" aria-hidden="true">CH</div>
-            <div>
-              <p class="name">Cherise</p>
-              <p class="role">insert later</p>
-              <p style="margin:0; color:var(--muted); font-size:14px;">insert later</p>
-              <div class="tags" style="margin-top:10px;">
-                <span class="tag">insert later</span><span class="tag">insert later</span><span class="tag">insert later</span>
-              </div>
-              <div class="links">
-                <a class="link" href="#" title="insert later">insert later</a>
-                <a class="link" href="#" title="insert later">insert later</a>
-              </div>
-            </div>
-          </div></div>
+</main>
 
-          <div class="card"><div class="profile">
-            <div class="avatar" aria-hidden="true">FI</div>
-            <div>
-              <p class="name">Fiona</p>
-              <p class="role">insert later</p>
-              <p style="margin:0; color:var(--muted); font-size:14px;">insert later</p>
-              <div class="tags" style="margin-top:10px;">
-                <span class="tag">insert later</span><span class="tag">insert later</span><span class="tag">insert later</span>
-              </div>
-              <div class="links">
-                <a class="link" href="#" title="insert later">insert later</a>
-                <a class="link" href="#" title="insert later">insert later</a>
-              </div>
-            </div>
-          </div></div>
+<footer>
+insert later
+</footer>
 
-          <div class="card"><div class="profile">
-            <div class="avatar" aria-hidden="true">IS</div>
-            <div>
-              <p class="name">Isabella</p>
-              <p class="role">insert later</p>
-              <p style="margin:0; color:var(--muted); font-size:14px;">insert later</p>
-              <div class="tags" style="margin-top:10px;">
-                <span class="tag">insert later</span><span class="tag">insert later</span><span class="tag">insert later</span>
-              </div>
-              <div class="links">
-                <a class="link" href="#" title="insert later">insert later</a>
-                <a class="link" href="#" title="insert later">insert later</a>
-              </div>
-            </div>
-          </div></div>
-
-          <div class="card"><div class="profile">
-            <div class="avatar" aria-hidden="true">LI</div>
-            <div>
-              <p class="name">Lisa</p>
-              <p class="role">insert later</p>
-              <p style="margin:0; color:var(--muted); font-size:14px;">insert later</p>
-              <div class="tags" style="margin-top:10px;">
-                <span class="tag">insert later</span><span class="tag">insert later</span><span class="tag">insert later</span>
-              </div>
-              <div class="links">
-                <a class="link" href="#" title="insert later">insert later</a>
-                <a class="link" href="#" title="insert later">insert later</a>
-              </div>
-            </div>
-          </div></div>
-
-          <div class="card"><div class="profile">
-            <div class="avatar" aria-hidden="true">LZ</div>
-            <div>
-              <p class="name">Liz</p>
-              <p class="role">insert later</p>
-              <p style="margin:0; color:var(--muted); font-size:14px;">insert later</p>
-              <div class="tags" style="margin-top:10px;">
-                <span class="tag">insert later</span><span class="tag">insert later</span><span class="tag">insert later</span>
-              </div>
-              <div class="links">
-                <a class="link" href="#" title="insert later">insert later</a>
-                <a class="link" href="#" title="insert later">insert later</a>
-              </div>
-            </div>
-          </div></div>
-
-          <div class="card"><div class="profile">
-            <div class="avatar" aria-hidden="true">NA</div>
-            <div>
-              <p class="name">Natalie</p>
-              <p class="role">insert later</p>
-              <p style="margin:0; color:var(--muted); font-size:14px;">insert later</p>
-              <div class="tags" style="margin-top:10px;">
-                <span class="tag">insert later</span><span class="tag">insert later</span><span class="tag">insert later</span>
-              </div>
-              <div class="links">
-                <a class="link" href="#" title="insert later">insert later</a>
-                <a class="link" href="#" title="insert later">insert later</a>
-              </div>
-            </div>
-          </div></div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- DONATE -->
-    <section id="donate">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>insert later</h2>
-            <p class="sub">insert later</p>
-          </div>
-        </div>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>insert later</h3>
-            <p>insert later</p>
-            <div style="margin-top:12px;">
-              <a class="btn primary" href="#" aria-label="insert later">insert later</a>
-            </div>
-          </div>
-          <div class="card">
-            <h3>insert later</h3>
-            <p>insert later</p>
-            <div style="margin-top:12px;">
-              <a class="btn" href="#contact">insert later</a>
-            </div>
-          </div>
-          <div class="card">
-            <h3>insert later</h3>
-            <p>insert later</p>
-            <div style="margin-top:12px;">
-              <a class="btn" href="#contact">insert later</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>insert later</h2>
-            <p class="sub">insert later</p>
-          </div>
-        </div>
-
-        <div class="grid-3">
-          <details class="card">
-            <summary>insert later</summary>
-            <p>insert later</p>
-          </details>
-          <details class="card">
-            <summary>insert later</summary>
-            <p>insert later</p>
-          </details>
-          <details class="card">
-            <summary>insert later</summary>
-            <p>insert later</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>insert later</h2>
-            <p class="sub">insert later</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <form id="contactForm">
-            <div>
-              <label for="parentName">insert later</label>
-              <input id="parentName" name="parentName" type="text" placeholder="insert later" required />
-            </div>
-            <div>
-              <label for="studentYear">insert later</label>
-              <select id="studentYear" name="studentYear" required>
-                <option value="" disabled selected>insert later</option>
-                <option>insert later</option><option>insert later</option><option>insert later</option><option>insert later</option>
-                <option>insert later</option><option>insert later</option><option>insert later</option><option>insert later</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="email">insert later</label>
-              <input id="email" name="email" type="email" placeholder="insert later" required />
-            </div>
-            <div>
-              <label for="suburb">insert later</label>
-              <input id="suburb" name="suburb" type="text" placeholder="insert later" />
-            </div>
-
-            <div class="full">
-              <label for="help">insert later</label>
-              <textarea id="help" name="help" placeholder="insert later" required></textarea>
-            </div>
-
-            <div class="full" style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
-              <button class="btn primary" type="submit">insert later</button>
-              <a class="btn" href="mailto:insert later?subject=insert%20later">insert later</a>
-              <span class="note">insert later</span>
-            </div>
-          </form>
-
-          <p class="note" style="margin-top:10px;">insert later</p>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="container">
-        <div class="footer-grid">
-          <div>
-            <div class="badge">
-              <span class="dot"></span>
-              <strong>insert later</strong>
-              <span class="tiny">insert later</span>
-            </div>
-            <p class="tiny" style="margin-top:10px;">
-              insert later <span id="year"></span> insert later
-            </p>
-          </div>
-          <div>
-            <p class="tiny" style="margin:0 0 8px;"><strong>insert later</strong></p>
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-              <a class="link" href="#programmes">insert later</a>
-              <a class="link" href="#team">insert later</a>
-              <a class="link" href="#contact">insert later</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </main>
-
-  <script>
-    // Mobile menu toggle
-    const nav = document.getElementById('nav');
-    const menuBtn = document.getElementById('menuBtn');
-    if (menuBtn) {
-      menuBtn.addEventListener('click', () => {
-        nav.classList.toggle('open');
-        menuBtn.textContent = nav.classList.contains('open') ? 'insert later' : 'insert later';
-      });
-    }
-
-    // Contact form -> opens email (static-site friendly)
-    const TEAM_EMAIL = "insert later"; // insert later
-    const form = document.getElementById('contactForm');
-
-    if (form) {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const parentName = document.getElementById('parentName').value.trim();
-        const studentYear = document.getElementById('studentYear').value;
-        const email = document.getElementById('email').value.trim();
-        const suburb = document.getElementById('suburb').value.trim();
-        const help = document.getElementById('help').value.trim();
-
-        const subject = encodeURIComponent("insert later");
-        const body = encodeURIComponent(
-          `insert later: ${parentName}\n` +
-          `insert later: ${studentYear}\n` +
-          `insert later: ${email}\n` +
-          `insert later: ${suburb || "insert later"}\n\n` +
-          `insert later:\n${help}\n`
-        );
-
-        window.location.href = `mailto:${TEAM_EMAIL}?subject=${subject}&body=${body}`;
-      });
-    }
-
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
