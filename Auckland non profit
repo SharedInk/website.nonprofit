@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Auckland Student Tutoring | Free/Low-Cost Tutoring (Non-Profit)</title>
+  <meta name="description" content="Auckland-based non-profit tutoring for primary and intermediate students. Support in reading, writing, maths, and confidence." />
+  <meta property="og:title" content="Auckland Student Tutoring" />
+  <meta property="og:description" content="Non-profit tutoring for primary and intermediate students in Auckland." />
+  <meta property="og:type" content="website" />
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#111a33;
+      --muted:#9fb0d0;
+      --text:#eef3ff;
+      --brand:#7c5cff;
+      --brand2:#31d3ff;
+      --ok:#5bffb0;
+      --danger:#ff6b6b;
+      --border: rgba(255,255,255,.12);
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(124,92,255,.35), transparent 55%),
+        radial-gradient(900px 600px at 95% 15%, rgba(49,211,255,.25), transparent 55%),
+        radial-gradient(900px 700px at 30% 120%, rgba(91,255,176,.18), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+
+    a{color:inherit}
+    .container{max-width:1100px; margin:0 auto; padding:0 18px}
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 12px; border:1px solid var(--border);
+      border-radius:999px; color:var(--muted);
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(8px);
+      font-size: 14px;
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--ok); box-shadow:0 0 20px rgba(91,255,176,.45)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      text-decoration:none;
+      box-shadow: 0 10px 25px rgba(0,0,0,.18);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      font-weight: 650;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.20)}
+    .btn.primary{
+      border: none;
+      background: linear-gradient(90deg, var(--brand), var(--brand2));
+      color:#081022;
+    }
+    .btn.primary:hover{background: linear-gradient(90deg, rgba(124,92,255,.95), rgba(49,211,255,.95))}
+    .btn.small{padding:10px 14px; font-weight: 650; font-size: 14px}
+
+    /* Header / Nav */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(11,16,32,.55);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+      font-weight: 850;
+      letter-spacing: .2px;
+    }
+    .logo{
+      width:36px;height:36px;border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 18px 40px rgba(124,92,255,.22);
+      display:grid; place-items:center;
+      color:#0a0f1f;
+      font-weight: 900;
+    }
+    nav ul{list-style:none; padding:0; margin:0; display:flex; gap:14px; align-items:center}
+    nav a{
+      text-decoration:none;
+      color:var(--muted);
+      padding:10px 10px;
+      border-radius: 999px;
+      transition: background .15s ease, color .15s ease;
+      font-weight: 650;
+      font-size: 14px;
+    }
+    nav a:hover{background: rgba(255,255,255,.06); color: var(--text)}
+    .nav-cta{display:flex; gap:10px; align-items:center}
+    .mobile-toggle{
+      display:none;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      border-radius: 12px;
+      padding:10px 12px;
+      font-weight:700;
+    }
+
+    /* Hero */
+    .hero{padding:52px 0 24px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(34px, 4.2vw, 54px);
+      line-height:1.05;
+      letter-spacing:-.6px;
+    }
+    .lead{
+      color: var(--muted);
+      font-size: 16.5px;
+      max-width: 58ch;
+      margin: 0 0 18px;
+    }
+    .hero-card{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute; inset:-120px -120px auto auto;
+      width:260px; height:260px;
+      background: radial-gradient(circle at center, rgba(49,211,255,.35), transparent 60%);
+      transform: rotate(10deg);
+      pointer-events:none;
+    }
+    .stats{
+      display:grid; grid-template-columns: repeat(2, 1fr);
+      gap:12px; margin-top: 12px;
+    }
+    .stat{
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      padding:12px;
+      background: rgba(17,26,51,.35);
+    }
+    .stat .k{font-size: 22px; font-weight: 900}
+    .stat .t{color: var(--muted); font-size: 13px; margin-top: 2px}
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+    .fineprint{color: rgba(238,243,255,.7); font-size: 13px; margin-top: 12px}
+
+    /* Sections */
+    section{padding:38px 0}
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:12px; margin-bottom: 16px;
+    }
+    h2{margin:0; font-size: 26px; letter-spacing:-.3px}
+    .sub{color:var(--muted); margin:0; max-width: 70ch}
+
+    .grid-3{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+    .card{
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 12px 28px rgba(0,0,0,.22);
+    }
+    .card h3{margin:0 0 6px; font-size: 16.5px}
+    .card p{margin:0; color: var(--muted); font-size: 14.5px}
+
+    /* Team */
+    .team-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .profile{
+      display:flex; gap:12px; align-items:flex-start;
+    }
+    .avatar{
+      width:56px; height:56px; border-radius: 18px;
+      background: linear-gradient(135deg, rgba(124,92,255,.85), rgba(49,211,255,.75));
+      border: 1px solid rgba(255,255,255,.18);
+      display:grid; place-items:center;
+      color:#081022;
+      font-weight: 950;
+      flex: 0 0 auto;
+    }
+    .profile .name{font-weight: 900; margin:0; font-size: 16px}
+    .profile .role{margin:2px 0 8px; color: var(--muted); font-size: 13.5px}
+    .tags{display:flex; flex-wrap:wrap; gap:8px}
+    .tag{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(238,243,255,.85);
+      font-size: 12.5px;
+      font-weight: 650;
+    }
+    .links{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .link{
+      color: var(--muted);
+      text-decoration:none;
+      font-size: 13.5px;
+      border-bottom: 1px dashed rgba(255,255,255,.22);
+      padding-bottom: 1px;
+    }
+    .link:hover{color:var(--text)}
+
+    /* FAQ */
+    details{
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      padding:12px 14px;
+      background: rgba(255,255,255,.04);
+    }
+    details summary{cursor:pointer; font-weight: 800}
+    details p{margin:10px 0 0; color: var(--muted)}
+
+    /* Contact */
+    form{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top: 12px;
+    }
+    label{font-size: 13px; color: rgba(238,243,255,.86); font-weight: 700}
+    input, textarea, select{
+      width:100%;
+      border-radius: 14px;
+      padding:12px 12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(8,12,24,.55);
+      color: var(--text);
+      outline:none;
+      margin-top:6px;
+    }
+    textarea{min-height: 120px; resize: vertical}
+    .full{grid-column: 1 / -1}
+    .note{
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    footer{
+      padding:28px 0 40px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: rgba(238,243,255,.75);
+    }
+    .footer-grid{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+    .tiny{font-size: 12.5px; color: rgba(238,243,255,.65)}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .heart{color:#ff87b7}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns: 1fr}
+      .grid-3{grid-template-columns: 1fr}
+      .team-grid{grid-template-columns: 1fr}
+      form{grid-template-columns: 1fr}
+      nav ul{display:none}
+      .mobile-toggle{display:inline-flex}
+      .nav.open nav ul{
+        display:flex;
+        position:absolute;
+        left:18px; right:18px; top:64px;
+        flex-direction:column;
+        gap:6px;
+        padding:10px;
+        border-radius: 18px;
+        background: rgba(11,16,32,.92);
+        border: 1px solid rgba(255,255,255,.10);
+        box-shadow: var(--shadow);
+      }
+      nav a{width:100%; text-align:left}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="nav" id="nav">
+        <a class="brand" href="#top" aria-label="Home">
+          <div class="logo">AT</div>
+          <span>Auckland Tutoring</span>
+        </a>
+
+        <nav aria-label="Primary">
+          <ul>
+            <li><a href="#programmes">Programmes</a></li>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#team">Our team</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-cta">
+          <button class="mobile-toggle" id="menuBtn" aria-label="Open menu">Menu</button>
+          <a class="btn small" href="#contact">Request tutoring</a>
+          <a class="btn small primary" href="#donate">Support us</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <div class="container hero">
+      <div class="hero-grid">
+        <div>
+          <span class="pill"><span class="dot"></span> Non-profit tutoring • Auckland • Primary → Intermediate</span>
+          <h1>Support that builds skills — and confidence.</h1>
+          <p class="lead">
+            We’re a student-led non-profit offering friendly tutoring for Auckland learners (Years 1–8).
+            We focus on fundamentals, study habits, and feeling proud of progress.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#contact">Request tutoring</a>
+            <a class="btn" href="#programmes">See programmes</a>
+            <a class="btn" href="#team">Meet the team</a>
+          </div>
+
+          <p class="fineprint">
+            <strong>Note:</strong> We’re not a replacement for school or professional services.
+            We support learning with clear explanations and practice.
+          </p>
+        </div>
+
+        <div class="hero-card" role="region" aria-label="Quick info">
+          <h3 style="margin:0 0 8px; font-size: 18px;">What we offer</h3>
+          <div class="grid-3" style="margin-top:10px;">
+            <div class="card">
+              <h3>Maths</h3>
+              <p>Number, fractions, decimals, problem solving, confidence with steps.</p>
+            </div>
+            <div class="card">
+              <h3>Reading & Writing</h3>
+              <p>Comprehension, vocab, paragraphs, spelling strategies, clarity.</p>
+            </div>
+            <div class="card">
+              <h3>Study Skills</h3>
+              <p>Organisation, goal-setting, revision routines, homework planning.</p>
+            </div>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="k">Years 1–8</div>
+              <div class="t">Primary + Intermediate</div>
+            </div>
+            <div class="stat">
+              <div class="k">Flexible</div>
+              <div class="t">After-school / weekends</div>
+            </div>
+            <div class="stat">
+              <div class="k">Auckland</div>
+              <div class="t">Local community focus</div>
+            </div>
+            <div class="stat">
+              <div class="k">Non-profit</div>
+              <div class="t">By students, for students</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRAMMES -->
+    <section id="programmes">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Programmes</h2>
+            <p class="sub">Choose what fits your child best. We can also mix and match goals.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>1:1 Tutoring</h3>
+            <p>Personalised support. Great for targeted gaps, confidence, or tricky topics.</p>
+          </div>
+          <div class="card">
+            <h3>Small Groups (2–4)</h3>
+            <p>Fun + social learning. Ideal for friends or classmates working at similar levels.</p>
+          </div>
+          <div class="card">
+            <h3>Homework Club</h3>
+            <p>Quiet, structured time to finish homework with tutors nearby for help.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px;">
+          <h3 style="margin:0 0 6px;">Where we tutor</h3>
+          <p style="margin:0; color:var(--muted);">
+            Options could include local libraries, community spaces, or online calls (depending on what’s safest and easiest).
+            Add your exact plan here once you confirm it.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>How it works</h2>
+            <p class="sub">Simple steps so families know exactly what to expect.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>1) Quick sign-up</h3>
+            <p>Fill in the form with year level, goals, and availability.</p>
+          </div>
+          <div class="card">
+            <h3>2) Match & plan</h3>
+            <p>We match a tutor and make a short plan (skills + practice).</p>
+          </div>
+          <div class="card">
+            <h3>3) Learn & track progress</h3>
+            <p>Each session ends with a recap + a small next step.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px;">
+          <h3 style="margin:0 0 6px;">Our tutoring style</h3>
+          <p style="margin:0; color:var(--muted);">
+            Calm explanations, lots of practice, and encouragement. We focus on building independence
+            so students feel confident at school.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Our team</h2>
+            <p class="sub">Nine students, one mission: make learning feel possible.</p>
+          </div>
+          <a class="btn small" href="#contact">Work with us</a>
+        </div>
+
+        <div class="team-grid">
+          <!-- PROFILE TEMPLATE:
+               Change Initials, Name, Role, Bio, Tags, and Links.
+          -->
+          <div class="card">
+            <div class="profile">
+              <div class="avatar" aria-hidden="true">A1</div>
+              <div>
+                <p class="name">Your Name 1</p>
+                <p class="role">Founder • Maths & Study Skills</p>
+                <p style="margin:0; color:var(--muted); font-size:14px;">
+                  Short bio: what you tutor, what you’re good at, and your vibe (patient, step-by-step, etc.).
+                </p>
+                <div class="tags" style="margin-top:10px;">
+                  <span class="tag">Years 5–8</span>
+                  <span class="tag">Fractions</span>
+                  <span class="tag">Confidence</span>
+                </div>
+                <div class="links">
+                  <a class="link" href="#" title="Optional">Instagram</a>
+                  <a class="link" href="#" title="Optional">Email</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="profile">
+              <div class="avatar" aria-hidden="true">A2</div>
+              <div>
+                <p class="name">Your Name 2</p>
+                <p class="role">Co-Founder • Reading Support</p>
+                <p style="margin:0; color:var(--muted); font-size:14px;">
+                  Short bio: mention reading, comprehension, and helping students enjoy books again.
+                </p>
+                <div class="tags" style="margin-top:10px;">
+                  <span class="tag">Years 3–6</span>
+                  <span class="tag">Reading</span>
+                  <span class="tag">Comprehension</span>
+                </div>
+                <div class="links">
+                  <a class="link" href="#">Instagram</a>
+                  <a class="link" href="#">Email</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="profile">
+              <div class="avatar" aria-hidden="true">A3</div>
+              <div>
+                <p class="name">Your Name 3</p>
+                <p class="role">Operations • Group Sessions</p>
+                <p style="margin:0; color:var(--muted); font-size:14px;">
+                  Short bio: organisation, booking, and making sessions run smoothly.
+                </p>
+                <div class="tags" style="margin-top:10px;">
+                  <span class="tag">Homework Club</span>
+                  <span class="tag">Planning</span>
+                  <span class="tag">Support</span>
+                </div>
+                <div class="links">
+                  <a class="link" href="#">Instagram</a>
+                  <a class="link" href="#">Email</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="profile">
+              <div class="avatar" aria-hidden="true">A4</div>
+              <div>
+                <p class="name">Your Name 4</p>
+                <p class="role">Tutor • Writing & Spelling</p>
+                <p style="margin:0; color:var(--muted); font-size:14px;">
+                  Short bio: paragraphs, structure, vocabulary, spelling strategies.
+                </p>
+                <div class="tags" style="margin-top:10px;">
+                  <span class="tag">Years 4–8</span>
+                  <span class="tag">Writing</span>
+                  <span class="tag">Spelling</span>
+                </div>
+                <div class="links">
+                  <a class="link" href="#">Instagram</a>
+                  <a class="link" href="#">Email</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="profile">
+              <div class="avatar" aria-hidden="true">A5</div>
+              <div>
+                <p class="name">Your Name 5</p>
+                <p class="role">Tutor • Maths Foundations</p>
+                <p style="margin:0; color:var(--muted); font-size:14px;">
+                  Short bio: times tables, place value, fractions basics, reducing anxiety.
+                </p>
+                <div class="tags" style="margin-top:10px;">
+                  <span class="tag">Years 1–5</span>
+                  <span class="tag">Foundations</span>
+                  <span class="tag">Practice</span>
+                </div>
+                <div class="links">
+                  <a class="link" href="#">Instagram</a>
+                  <a class="link" href="#">Email</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="profile">
+              <div class="avatar" aria-hidden="true">A6</div>
+              <div>
+                <p class="name">Your Name 6</p>
+                <p class="role">Tutor • Extension & Challenge</p>
+                <p style="margin:0; color:var(--muted); font-size:14px;">
+                  Short bio: problem-solving, extension questions, building strong reasoning.
+                </p>
+                <div class="tags" style="margin-top:10px;">
+                  <span class="tag">Years 6–8</span>
+                  <span class="tag">Extension</span>
+                  <span class="tag">Reasoning</span>
+                </div>
+                <div class="links">
+                  <a class="link" href="#">Instagram</a>
+                  <a class="link" href="#">Email</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="profile">
+              <div class="avatar" aria-hidden="true">A7</div>
+              <div>
+                <p class="name">Your Name 7</p>
+                <p class="role">Community • Parent Liaison</p>
+                <p style="margin:0; color:var(--muted); font-size:14px;">
+                  Short bio: communications, updates, and making sure families feel supported.
+                </p>
+                <div class="tags" style="margin-top:10px;">
+                  <span class="tag">Communication</span>
+                  <span class="tag">Support</span>
+                  <span class="tag">Care</span>
+                </div>
+                <div class="links">
+                  <a class="link" href="#">Instagram</a>
+                  <a class="link" href="#">Email</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="profile">
+              <div class="avatar" aria-hidden="true">A8</div>
+              <div>
+                <p class="name">Your Name 8</p>
+                <p class="role">Tutor • Reading & Writing</p>
+                <p style="margin:0; color:var(--muted); font-size:14px;">
+                  Short bio: reading confidence, writing clarity, and helping students feel proud.
+                </p>
+                <div class="tags" style="margin-top:10px;">
+                  <span class="tag">Years 2–7</span>
+                  <span class="tag">Literacy</span>
+                  <span class="tag">Confidence</span>
+                </div>
+                <div class="links">
+                  <a class="link" href="#">Instagram</a>
+                  <a class="link" href="#">Email</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="profile">
+              <div class="avatar" aria-hidden="true">A9</div>
+              <div>
+                <p class="name">Your Name 9</p>
+                <p class="role">Design & Outreach</p>
+                <p style="margin:0; color:var(--muted); font-size:14px;">
+                  Short bio: graphics, social posts, partnerships, and spreading the word.
+                </p>
+                <div class="tags" style="margin-top:10px;">
+                  <span class="tag">Outreach</span>
+                  <span class="tag">Design</span>
+                  <span class="tag">Community</span>
+                </div>
+                <div class="links">
+                  <a class="link" href="#">Instagram</a>
+                  <a class="link" href="#">Email</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- DONATE / SUPPORT -->
+    <section id="donate">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Support us</h2>
+            <p class="sub">If you can help, your support goes toward resources and making tutoring accessible.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>Donate (optional)</h3>
+            <p>Add a donation link (Givealittle, bank transfer info, or sponsor). Replace the button link.</p>
+            <div style="margin-top:12px;">
+              <a class="btn primary" href="#" aria-label="Donate link">Donate</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Partner with us</h3>
+            <p>Libraries, schools, and community centres — we’d love to collaborate.</p>
+            <div style="margin-top:12px;">
+              <a class="btn" href="#contact">Get in touch</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Volunteer</h3>
+            <p>If you’re a senior student or uni student, you can help as a tutor or mentor.</p>
+            <div style="margin-top:12px;">
+              <a class="btn" href="#contact">Volunteer interest</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>FAQ</h2>
+            <p class="sub">Quick answers for parents and caregivers.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <details class="card">
+            <summary>What year levels do you tutor?</summary>
+            <p>We focus on Years 1–8 (primary and intermediate). We can adapt to different learning needs.</p>
+          </details>
+          <details class="card">
+            <summary>Do you charge?</summary>
+            <p>We’re a non-profit. If you choose to donate, it helps cover learning materials. (Edit this to match your plan.)</p>
+          </details>
+          <details class="card">
+            <summary>Where are sessions held?</summary>
+            <p>Common options: libraries, community spaces, or online. Update this once your team confirms locations.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Contact</h2>
+            <p class="sub">Send a request and we’ll reply with next steps.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <!--
+            IMPORTANT:
+            GitHub Pages is static, so this form cannot "submit" to a server by default.
+            Two easy options:
+            1) Use a free form service like Formspree / Netlify Forms (requires setup).
+            2) Use mailto (below), which opens the user's email app.
+          -->
+          <form id="contactForm">
+            <div>
+              <label for="parentName">Parent/Caregiver name</label>
+              <input id="parentName" name="parentName" type="text" placeholder="e.g., Sarah" required />
+            </div>
+            <div>
+              <label for="studentYear">Student year level</label>
+              <select id="studentYear" name="studentYear" required>
+                <option value="" disabled selected>Select…</option>
+                <option>Year 1</option><option>Year 2</option><option>Year 3</option><option>Year 4</option>
+                <option>Year 5</option><option>Year 6</option><option>Year 7</option><option>Year 8</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="name@email.com" required />
+            </div>
+            <div>
+              <label for="suburb">Suburb (Auckland)</label>
+              <input id="suburb" name="suburb" type="text" placeholder="e.g., Mt Eden" />
+            </div>
+
+            <div class="full">
+              <label for="help">What do they need help with?</label>
+              <textarea id="help" name="help" placeholder="Maths topic, reading goals, upcoming test, homework routine…" required></textarea>
+            </div>
+
+            <div class="full" style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+              <button class="btn primary" type="submit">Send request</button>
+              <a class="btn" href="mailto:yourteamemail@example.com?subject=Auckland%20Tutoring%20Request">Email us directly</a>
+              <span class="note">Update the email address to your real team email.</span>
+            </div>
+          </form>
+
+          <p class="note" style="margin-top:10px;">
+            Tip: create a shared inbox like <strong>aucklandtutoring@gmail.com</strong> (or school-approved email),
+            then set that in the mailto link + the JS below.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="badge">
+              <span class="dot"></span>
+              <strong>Auckland Tutoring</strong>
+              <span class="tiny">Non-profit</span>
+            </div>
+            <p class="tiny" style="margin-top:10px;">
+              © <span id="year"></span> Auckland Tutoring. Built with care <span class="heart">♥</span>
+            </p>
+          </div>
+          <div>
+            <p class="tiny" style="margin:0 0 8px;"><strong>Quick links</strong></p>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="link" href="#programmes">Programmes</a>
+              <a class="link" href="#team">Team</a>
+              <a class="link" href="#contact">Contact</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Mobile menu toggle
+    const nav = document.getElementById('nav');
+    const menuBtn = document.getElementById('menuBtn');
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        nav.classList.toggle('open');
+        menuBtn.textContent = nav.classList.contains('open') ? 'Close' : 'Menu';
+      });
+    }
+
+    // Contact form -> opens email with prefilled details (static-site friendly)
+    const TEAM_EMAIL = "yourteamemail@example.com"; // <-- CHANGE THIS
+    const form = document.getElementById('contactForm');
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const parentName = document.getElementById('parentName').value.trim();
+        const studentYear = document.getElementById('studentYear').value;
+        const email = document.getElementById('email').value.trim();
+        const suburb = document.getElementById('suburb').value.trim();
+        const help = document.getElementById('help').value.trim();
+
+        const subject = encodeURIComponent("Auckland Tutoring Request");
+        const body = encodeURIComponent(
+          `Parent/Caregiver: ${parentName}\n` +
+          `Student Year Level: ${studentYear}\n` +
+          `Email: ${email}\n` +
+          `Suburb: ${suburb || "—"}\n\n` +
+          `Help needed:\n${help}\n`
+        );
+
+        window.location.href = `mailto:${TEAM_EMAIL}?subject=${subject}&body=${body}`;
+      });
+    }
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
