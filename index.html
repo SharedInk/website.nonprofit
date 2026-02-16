@@ -1,389 +1,651 @@
 <!doctype html>
 <html lang="en-NZ">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>insert later</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>insert later</title>
+  <meta name="description" content="insert later" />
 
-<style>
-:root{
-  --orange:#ff8a3d;
-  --orange2:#ff9f5a;
-  --blue:#8fd0ff;
-  --blue2:#3fb2ff;
-  --white:#ffffff;
+  <style>
+    :root{
+      /* 1:1:1 palette */
+      --blue: #3fb2ff;
+      --blueSoft: #bfe7ff;
 
-  --text:#ffffff;
-  --muted:rgba(255,255,255,.85);
-  --border:rgba(255,255,255,.25);
-  --shadow:0 20px 50px rgba(0,0,0,.18);
-  --radius:18px;
-}
+      --orange: #ff8a3d;
+      --orangeSoft: #ffd2b6;
 
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-  background:linear-gradient(180deg,var(--orange),var(--orange2));
-  color:var(--text);
-  line-height:1.6;
-}
-.container{max-width:1100px;margin:0 auto;padding:0 18px}
-a{text-decoration:none;color:inherit}
+      --white: #ffffff;
 
-/* HEADER */
-header{
-  position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,.15);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-}
-.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
-.logo{
-  width:40px;height:40px;border-radius:12px;
-  background:linear-gradient(135deg,var(--blue),var(--white));
-  display:grid;place-items:center;
-  font-weight:900;color:var(--orange);
-}
-nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0}
-nav a{padding:8px 10px;border-radius:999px}
-nav a:hover{background:rgba(255,255,255,.2)}
+      --ink: #0b1b2a;
+      --muted: rgba(11,27,42,.70);
 
-.btn{
-  padding:10px 16px;border-radius:999px;
-  border:1px solid var(--border);
-  background:var(--white);
-  color:var(--orange);
-  font-weight:800;
-}
-.btn.primary{
-  background:var(--blue);
-  color:white;
-}
-.btn:hover{opacity:.9}
+      --border: rgba(11,27,42,.12);
+      --shadow: 0 18px 45px rgba(11,27,42,.14);
+      --radius: 18px;
+    }
 
-/* HERO */
-.hero{padding:70px 0;text-align:left}
-h1{font-size:48px;margin:10px 0}
-.lead{max-width:650px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--ink);
+      line-height: 1.6;
 
-/* SECTION */
-section{padding:60px 0}
-.card{
-  background:rgba(255,255,255,.15);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:20px;
-  box-shadow:var(--shadow);
-}
+      /* Balanced background: blue + white + orange all present */
+      background:
+        linear-gradient(90deg,
+          rgba(63,178,255,.35) 0%,
+          rgba(63,178,255,.35) 33.33%,
+          rgba(255,255,255,1) 33.33%,
+          rgba(255,255,255,1) 66.66%,
+          rgba(255,138,61,.30) 66.66%,
+          rgba(255,138,61,.30) 100%
+        );
+      min-height:100vh;
+    }
 
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    a{color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:0 18px}
 
-/* TEAM */
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.profile{display:flex;gap:14px}
-.avatar{
-  width:60px;height:60px;border-radius:18px;
-  background:linear-gradient(135deg,var(--white),var(--blue));
-  display:grid;place-items:center;
-  font-weight:900;color:var(--orange);
-}
-.name{font-weight:900;margin:0}
-.role{margin:4px 0 8px;color:var(--muted);font-size:14px}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{
-  background:var(--white);
-  color:var(--orange);
-  padding:6px 10px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:700;
-}
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      background: rgba(255,255,255,.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+      font-weight: 950;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+    .logo{
+      width:38px; height:38px;
+      border-radius:12px;
+      background: conic-gradient(from 210deg, var(--blue), var(--white), var(--orange), var(--blue));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display:grid; place-items:center;
+      font-weight: 950;
+    }
+    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    nav a{
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:999px;
+      font-weight: 800;
+      font-size: 14px;
+      color: rgba(11,27,42,.78);
+      transition: background .15s ease;
+    }
+    nav a:hover{background: rgba(63,178,255,.14)}
 
-.qual-title{
-  margin:14px 0 6px;
-  font-weight:900;
-}
-.qual-list{
-  margin:0;
-  padding-left:18px;
-  color:var(--muted);
-}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      font-weight: 900;
+      text-decoration:none;
+      box-shadow: 0 10px 22px rgba(11,27,42,.10);
+      transition: transform .15s ease, opacity .15s ease;
+    }
+    .btn:hover{transform: translateY(-1px); opacity:.95}
+    .btn.blue{background: var(--blue); color: var(--white); border-color: rgba(0,0,0,0)}
+    .btn.orange{background: var(--orange); color: var(--white); border-color: rgba(0,0,0,0)}
 
-/* FOOTER */
-footer{
-  padding:40px 0;
-  border-top:1px solid var(--border);
-  text-align:center;
-  color:var(--muted);
-}
+    /* Sections */
+    section{padding:54px 0}
+    .section-title{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-bottom:16px}
+    h1{margin:0;font-size: clamp(36px, 4.6vw, 56px);letter-spacing:-.6px}
+    h2{margin:0;font-size: 28px;letter-spacing:-.3px}
+    p{margin:0}
+    .sub{color: var(--muted);max-width:75ch}
 
-@media(max-width:900px){
-  .grid-3,.team-grid{grid-template-columns:1fr}
-}
-</style>
+    /* Layout grids */
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+
+    /* Cards with balanced 1:1:1 look */
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding:18px;
+      background:
+        linear-gradient(135deg,
+          rgba(63,178,255,.22) 0%,
+          rgba(255,255,255,.85) 50%,
+          rgba(255,138,61,.18) 100%
+        );
+    }
+    .card.white{
+      background: rgba(255,255,255,.92);
+    }
+    .card.blue{
+      background: linear-gradient(135deg, rgba(63,178,255,.28), rgba(255,255,255,.78));
+    }
+    .card.orange{
+      background: linear-gradient(135deg, rgba(255,138,61,.26), rgba(255,255,255,.78));
+    }
+
+    /* Hero */
+    .hero{
+      padding:62px 0 20px;
+    }
+    .hero-wrap{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.75);
+      font-weight: 850;
+      color: rgba(11,27,42,.75);
+      width: fit-content;
+    }
+    .dots{
+      display:flex;gap:6px;align-items:center
+    }
+    .dot{width:10px;height:10px;border-radius:999px}
+    .dot.blue{background:var(--blue)}
+    .dot.white{background:var(--white);border:1px solid var(--border)}
+    .dot.orange{background:var(--orange)}
+    .lead{margin-top:12px;color: var(--muted);max-width:65ch}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+    .stat{
+      border:1px solid var(--border);
+      border-radius: 16px;
+      padding:12px;
+      background: rgba(255,255,255,.82);
+    }
+    .stat .k{font-weight: 950}
+    .stat .t{color: var(--muted); font-size: 13px; margin-top: 3px}
+
+    /* Team */
+    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .profile{display:flex;gap:12px;align-items:flex-start}
+    .avatar{
+      width:56px;height:56px;border-radius:18px;
+      border:1px solid var(--border);
+      background: conic-gradient(from 225deg, rgba(63,178,255,.95), rgba(255,255,255,1), rgba(255,138,61,.95));
+      display:grid;place-items:center;
+      font-weight: 950;
+      color: rgba(11,27,42,.85);
+      flex: 0 0 auto;
+    }
+    .name{margin:0;font-weight:950;font-size:16px}
+    .role{margin:2px 0 10px;color:var(--muted);font-size:13.5px;font-weight:800}
+
+    .tags{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{
+      padding:6px 10px;border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.86);
+      font-size:12.5px;
+      font-weight:850;
+      color: rgba(11,27,42,.85);
+    }
+    .qual-title{margin:12px 0 6px;font-weight:950}
+    .qual-list{margin:0;padding-left:18px;color: var(--muted)}
+    .qual-list li{margin:4px 0}
+
+    /* Contact blocks */
+    .contact-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      color: rgba(11,27,42,.80);
+      word-break: break-word;
+    }
+
+    footer{
+      padding:30px 0 44px;
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,.70);
+      color: rgba(11,27,42,.70);
+    }
+
+    /* Mobile */
+    @media (max-width: 900px){
+      .hero-wrap{grid-template-columns:1fr}
+      .grid-3,.grid-2,.team-grid,.contact-grid{grid-template-columns:1fr}
+      nav ul{gap:6px}
+    }
+  </style>
 </head>
 
 <body>
-
-<header>
-  <div class="container nav">
-    <div style="display:flex;align-items:center;gap:10px;">
-      <div class="logo">IL</div>
-      <strong>insert later</strong>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top">
+          <div class="logo">AN</div>
+          <span>Auckland Non Profit</span>
+        </a>
+        <nav aria-label="insert later">
+          <ul>
+            <li><a href="#about">insert later</a></li>
+            <li><a href="#programmes">insert later</a></li>
+            <li><a href="#team">insert later</a></li>
+            <li><a href="#contact">insert later</a></li>
+          </ul>
+        </nav>
+      </div>
     </div>
-    <nav>
-      <ul>
-        <li><a href="#programmes">insert later</a></li>
-        <li><a href="#team">insert later</a></li>
-        <li><a href="#contact">insert later</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  </header>
 
-<main>
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-wrap">
+          <div class="card white">
+            <div class="pill">
+              <span class="dots">
+                <span class="dot blue"></span>
+                <span class="dot white"></span>
+                <span class="dot orange"></span>
+              </span>
+              <span>insert later</span>
+            </div>
 
-<section class="hero container">
-  <h1>insert later</h1>
-  <p class="lead">insert later</p>
-  <div style="display:flex;gap:12px;margin-top:18px;">
-    <a class="btn primary" href="#contact">insert later</a>
-    <a class="btn" href="#team">insert later</a>
-  </div>
-</section>
+            <h1 style="margin-top:14px;">insert later</h1>
+            <p class="lead">insert later</p>
 
-<section id="programmes">
-  <div class="container grid-3">
-    <div class="card"><h3>insert later</h3><p>insert later</p></div>
-    <div class="card"><h3>insert later</h3><p>insert later</p></div>
-    <div class="card"><h3>insert later</h3><p>insert later</p></div>
-  </div>
-</section>
+            <div class="hero-actions">
+              <a class="btn blue" href="#contact">insert later</a>
+              <a class="btn orange" href="#team">insert later</a>
+              <a class="btn" href="#about">insert later</a>
+            </div>
 
-<section id="team">
-<div class="container">
-<h2>insert later</h2>
+            <p style="margin-top:14px;color:var(--muted);font-weight:800;">insert later</p>
+          </div>
 
-<div class="team-grid">
+          <div class="card">
+            <h2 style="margin-bottom:10px;">insert later</h2>
+            <div class="stats">
+              <div class="stat">
+                <div class="k">insert later</div>
+                <div class="t">insert later</div>
+              </div>
+              <div class="stat">
+                <div class="k">insert later</div>
+                <div class="t">insert later</div>
+              </div>
+              <div class="stat">
+                <div class="k">insert later</div>
+                <div class="t">insert later</div>
+              </div>
+              <div class="stat">
+                <div class="k">insert later</div>
+                <div class="t">insert later</div>
+              </div>
+            </div>
+            <p style="margin-top:12px;color:var(--muted);font-weight:800;">insert later</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- AARNA -->
-<div class="card">
-<div class="profile">
-<div class="avatar">AA</div>
-<div>
-<p class="name">Aarna</p>
-<p class="role">insert later</p>
-<div class="tags">
-<span class="tag">Tech</span>
-<span class="tag">Science</span>
-</div>
-<p class="qual-title">My Qualifications</p>
-<ul class="qual-list">
-<li>insert later</li>
-<li>insert later</li>
-<li>insert later</li>
-</ul>
-</div>
-</div>
-</div>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>insert later</h2>
+            <p class="sub">insert later</p>
+          </div>
+        </div>
 
-<!-- ALYSSA -->
-<div class="card">
-<div class="profile">
-<div class="avatar">AL</div>
-<div>
-<p class="name">Alyssa</p>
-<p class="role">insert later</p>
-<div class="tags">
-<span class="tag">Chess</span>
-<span class="tag">Music Theory</span>
-<span class="tag">French</span>
-<span class="tag">Physics</span>
-</div>
-<p class="qual-title">My Qualifications</p>
-<ul class="qual-list">
-<li>insert later</li>
-<li>insert later</li>
-<li>insert later</li>
-</ul>
-</div>
-</div>
-</div>
+        <div class="grid-2">
+          <div class="card blue">
+            <h3 style="margin:0 0 8px;">insert later</h3>
+            <p class="sub">insert later</p>
+          </div>
+          <div class="card orange">
+            <h3 style="margin:0 0 8px;">insert later</h3>
+            <p class="sub">insert later</p>
+          </div>
+        </div>
 
-<!-- BELLA -->
-<div class="card">
-<div class="profile">
-<div class="avatar">BE</div>
-<div>
-<p class="name">Bella</p>
-<p class="role">insert later</p>
-<div class="tags">
-<span class="tag">Math (Competition)</span>
-<span class="tag">Chess</span>
-</div>
-<p class="qual-title">My Qualifications</p>
-<ul class="qual-list">
-<li>insert later</li>
-<li>insert later</li>
-<li>insert later</li>
-</ul>
-</div>
-</div>
-</div>
+        <div class="grid-3" style="margin-top:14px;">
+          <div class="card white">
+            <h3 style="margin:0 0 8px;">insert later</h3>
+            <p class="sub">insert later</p>
+          </div>
+          <div class="card white">
+            <h3 style="margin:0 0 8px;">insert later</h3>
+            <p class="sub">insert later</p>
+          </div>
+          <div class="card white">
+            <h3 style="margin:0 0 8px;">insert later</h3>
+            <p class="sub">insert later</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- CHERISE -->
-<div class="card">
-<div class="profile">
-<div class="avatar">CH</div>
-<div>
-<p class="name">Cherise</p>
-<p class="role">insert later</p>
-<div class="tags">
-<span class="tag">Science</span>
-<span class="tag">Spanish</span>
-<span class="tag">Biology</span>
-</div>
-<p class="qual-title">My Qualifications</p>
-<ul class="qual-list">
-<li>insert later</li>
-<li>insert later</li>
-<li>insert later</li>
-</ul>
-</div>
-</div>
-</div>
+    <!-- PROGRAMMES -->
+    <section id="programmes">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>insert later</h2>
+            <p class="sub">insert later</p>
+          </div>
+        </div>
 
-<!-- IABELLA -->
-<div class="card">
-<div class="profile">
-<div class="avatar">IA</div>
-<div>
-<p class="name">Iabella</p>
-<p class="role">insert later</p>
-<div class="tags">
-<span class="tag">English</span>
-<span class="tag">Math</span>
-<span class="tag">Science</span>
-<span class="tag">Speech</span>
-</div>
-<p class="qual-title">My Qualifications</p>
-<ul class="qual-list">
-<li>insert later</li>
-<li>insert later</li>
-<li>insert later</li>
-</ul>
-</div>
-</div>
-</div>
+        <div class="grid-3">
+          <div class="card white">
+            <h3 style="margin:0 0 8px;">insert later</h3>
+            <p class="sub">insert later</p>
+          </div>
+          <div class="card white">
+            <h3 style="margin:0 0 8px;">insert later</h3>
+            <p class="sub">insert later</p>
+          </div>
+          <div class="card white">
+            <h3 style="margin:0 0 8px;">insert later</h3>
+            <p class="sub">insert later</p>
+          </div>
+        </div>
 
-<!-- FIONA -->
-<div class="card">
-<div class="profile">
-<div class="avatar">FI</div>
-<div>
-<p class="name">Fiona</p>
-<p class="role">insert later</p>
-<div class="tags">
-<span class="tag">Chinese</span>
-<span class="tag">History</span>
-<span class="tag">English</span>
-</div>
-<p class="qual-title">My Qualifications</p>
-<ul class="qual-list">
-<li>insert later</li>
-<li>insert later</li>
-<li>insert later</li>
-</ul>
-</div>
-</div>
-</div>
+        <div class="card" style="margin-top:14px;">
+          <h3 style="margin:0 0 8px;">insert later</h3>
+          <p class="sub">insert later</p>
+        </div>
+      </div>
+    </section>
 
-<!-- LISA -->
-<div class="card">
-<div class="profile">
-<div class="avatar">LI</div>
-<div>
-<p class="name">Lisa</p>
-<p class="role">insert later</p>
-<div class="tags">
-<span class="tag">English</span>
-<span class="tag">Speech</span>
-<span class="tag">French</span>
-<span class="tag">Science</span>
-</div>
-<p class="qual-title">My Qualifications</p>
-<ul class="qual-list">
-<li>insert later</li>
-<li>insert later</li>
-<li>insert later</li>
-</ul>
-</div>
-</div>
-</div>
+    <!-- TEAM -->
+    <section id="team">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>insert later</h2>
+            <p class="sub">insert later</p>
+          </div>
+          <a class="btn blue" href="#contact">insert later</a>
+        </div>
 
-<!-- LIZ -->
-<div class="card">
-<div class="profile">
-<div class="avatar">LZ</div>
-<div>
-<p class="name">Liz</p>
-<p class="role">insert later</p>
-<div class="tags">
-<span class="tag">Science</span>
-<span class="tag">Art</span>
-</div>
-<p class="qual-title">My Qualifications</p>
-<ul class="qual-list">
-<li>insert later</li>
-<li>insert later</li>
-<li>insert later</li>
-</ul>
-</div>
-</div>
-</div>
+        <div class="team-grid">
 
-<!-- NATALIE -->
-<div class="card">
-<div class="profile">
-<div class="avatar">NA</div>
-<div>
-<p class="name">Natalie</p>
-<p class="role">insert later</p>
-<div class="tags">
-<span class="tag">Drama</span>
-<span class="tag">Biology</span>
-<span class="tag">Admin</span>
-</div>
-<p class="qual-title">My Qualifications</p>
-<ul class="qual-list">
-<li>insert later</li>
-<li>insert later</li>
-<li>insert later</li>
-</ul>
-</div>
-</div>
-</div>
+          <!-- AARNA -->
+          <div class="card white">
+            <div class="profile">
+              <div class="avatar">AA</div>
+              <div>
+                <p class="name">Aarna</p>
+                <p class="role">insert later</p>
+                <div class="tags">
+                  <span class="tag">Tech</span>
+                  <span class="tag">Science</span>
+                </div>
+                <div class="qual-title">My Qualifications</div>
+                <ul class="qual-list">
+                  <li>insert later</li>
+                  <li>insert later</li>
+                  <li>insert later</li>
+                </ul>
+              </div>
+            </div>
+          </div>
 
-</div>
-</div>
-</section>
+          <!-- ALYSSA -->
+          <div class="card white">
+            <div class="profile">
+              <div class="avatar">AL</div>
+              <div>
+                <p class="name">Alyssa</p>
+                <p class="role">insert later</p>
+                <div class="tags">
+                  <span class="tag">Chess</span>
+                  <span class="tag">Music Theory</span>
+                  <span class="tag">French</span>
+                  <span class="tag">Physics</span>
+                </div>
+                <div class="qual-title">My Qualifications</div>
+                <ul class="qual-list">
+                  <li>insert later</li>
+                  <li>insert later</li>
+                  <li>insert later</li>
+                </ul>
+              </div>
+            </div>
+          </div>
 
-<section id="contact">
-<div class="container">
-<h2>insert later</h2>
-<div class="card">
-<p>insert later</p>
-<a class="btn primary" href="mailto:insert later">insert later</a>
-</div>
-</div>
-</section>
+          <!-- BELLA -->
+          <div class="card white">
+            <div class="profile">
+              <div class="avatar">BE</div>
+              <div>
+                <p class="name">Bella</p>
+                <p class="role">insert later</p>
+                <div class="tags">
+                  <span class="tag">Math (competition)</span>
+                  <span class="tag">Chess</span>
+                </div>
+                <div class="qual-title">My Qualifications</div>
+                <ul class="qual-list">
+                  <li>insert later</li>
+                  <li>insert later</li>
+                  <li>insert later</li>
+                </ul>
+              </div>
+            </div>
+          </div>
 
-</main>
+          <!-- CHERISE -->
+          <div class="card white">
+            <div class="profile">
+              <div class="avatar">CH</div>
+              <div>
+                <p class="name">Cherise</p>
+                <p class="role">insert later</p>
+                <div class="tags">
+                  <span class="tag">Science</span>
+                  <span class="tag">Spanish</span>
+                  <span class="tag">Biology</span>
+                </div>
+                <div class="qual-title">My Qualifications</div>
+                <ul class="qual-list">
+                  <li>insert later</li>
+                  <li>insert later</li>
+                  <li>insert later</li>
+                </ul>
+              </div>
+            </div>
+          </div>
 
-<footer>
-insert later
-</footer>
+          <!-- ISABELLA -->
+          <div class="card white">
+            <div class="profile">
+              <div class="avatar">IS</div>
+              <div>
+                <p class="name">Isabella</p>
+                <p class="role">insert later</p>
+                <div class="tags">
+                  <span class="tag">English</span>
+                  <span class="tag">Math</span>
+                  <span class="tag">Science</span>
+                  <span class="tag">Speech</span>
+                </div>
+                <div class="qual-title">My Qualifications</div>
+                <ul class="qual-list">
+                  <li>insert later</li>
+                  <li>insert later</li>
+                  <li>insert later</li>
+                </ul>
+              </div>
+            </div>
+          </div>
 
+          <!-- FIONA -->
+          <div class="card white">
+            <div class="profile">
+              <div class="avatar">FI</div>
+              <div>
+                <p class="name">Fiona</p>
+                <p class="role">insert later</p>
+                <div class="tags">
+                  <span class="tag">Chinese</span>
+                  <span class="tag">History</span>
+                  <span class="tag">English</span>
+                </div>
+                <div class="qual-title">My Qualifications</div>
+                <ul class="qual-list">
+                  <li>insert later</li>
+                  <li>insert later</li>
+                  <li>insert later</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- LISA -->
+          <div class="card white">
+            <div class="profile">
+              <div class="avatar">LI</div>
+              <div>
+                <p class="name">Lisa</p>
+                <p class="role">insert later</p>
+                <div class="tags">
+                  <span class="tag">English</span>
+                  <span class="tag">Speech</span>
+                  <span class="tag">French</span>
+                  <span class="tag">Science</span>
+                </div>
+                <div class="qual-title">My Qualifications</div>
+                <ul class="qual-list">
+                  <li>insert later</li>
+                  <li>insert later</li>
+                  <li>insert later</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- LIZ -->
+          <div class="card white">
+            <div class="profile">
+              <div class="avatar">LZ</div>
+              <div>
+                <p class="name">Liz</p>
+                <p class="role">insert later</p>
+                <div class="tags">
+                  <span class="tag">Science</span>
+                  <span class="tag">Art</span>
+                </div>
+                <div class="qual-title">My Qualifications</div>
+                <ul class="qual-list">
+                  <li>insert later</li>
+                  <li>insert later</li>
+                  <li>insert later</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- NATALIE -->
+          <div class="card white">
+            <div class="profile">
+              <div class="avatar">NA</div>
+              <div>
+                <p class="name">Natalie</p>
+                <p class="role">insert later</p>
+                <div class="tags">
+                  <span class="tag">Drama</span>
+                  <span class="tag">Biology</span>
+                  <span class="tag">Admin</span>
+                </div>
+                <div class="qual-title">My Qualifications</div>
+                <ul class="qual-list">
+                  <li>insert later</li>
+                  <li>insert later</li>
+                  <li>insert later</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / EMAILS -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>insert later</h2>
+            <p class="sub">insert later</p>
+          </div>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card white">
+            <h3 style="margin:0 0 8px;">insert later</h3>
+            <p class="sub">insert later</p>
+            <div class="mono" style="margin-top:10px;">insert later</div>
+          </div>
+
+          <div class="card white">
+            <h3 style="margin:0 0 8px;">insert later</h3>
+            <p class="sub">insert later</p>
+            <div class="mono" style="margin-top:10px;">insert later</div>
+          </div>
+
+          <div class="card white">
+            <h3 style="margin:0 0 8px;">insert later</h3>
+            <p class="sub">insert later</p>
+            <div class="mono" style="margin-top:10px;">insert later</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px;">
+          <h3 style="margin:0 0 8px;">insert later</h3>
+          <p class="sub">insert later</p>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn blue" href="mailto:insert later">insert later</a>
+            <a class="btn orange" href="mailto:insert later">insert later</a>
+            <a class="btn" href="mailto:insert later">insert later</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;">
+          <div style="font-weight:900;">Auckland Non Profit</div>
+          <div style="font-weight:800;">insert later</div>
+        </div>
+        <div style="margin-top:10px;font-size:13px;">insert later</div>
+      </div>
+    </footer>
+  </main>
 </body>
 </html>
