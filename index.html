@@ -1,651 +1,329 @@
 <!doctype html>
 <html lang="en-NZ">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>insert later</title>
-  <meta name="description" content="insert later" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Auckland Student Tutoring Collective</title>
+    <meta
+      name="description"
+      content="A student-led, non-profit tutoring collective supporting primary to intermediate learners across Auckland."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-  <style>
-    :root{
-      /* 1:1:1 palette */
-      --blue: #3fb2ff;
-      --blueSoft: #bfe7ff;
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-      --orange: #ff8a3d;
-      --orangeSoft: #ffd2b6;
-
-      --white: #ffffff;
-
-      --ink: #0b1b2a;
-      --muted: rgba(11,27,42,.70);
-
-      --border: rgba(11,27,42,.12);
-      --shadow: 0 18px 45px rgba(11,27,42,.14);
-      --radius: 18px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color: var(--ink);
-      line-height: 1.6;
-
-      /* Balanced background: blue + white + orange all present */
-      background:
-        linear-gradient(90deg,
-          rgba(63,178,255,.35) 0%,
-          rgba(63,178,255,.35) 33.33%,
-          rgba(255,255,255,1) 33.33%,
-          rgba(255,255,255,1) 66.66%,
-          rgba(255,138,61,.30) 66.66%,
-          rgba(255,138,61,.30) 100%
-        );
-      min-height:100vh;
-    }
-
-    a{color:inherit}
-    .container{max-width:1100px;margin:0 auto;padding:0 18px}
-
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:50;
-      background: rgba(255,255,255,.75);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 0;
-      gap:12px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      text-decoration:none;
-      font-weight: 950;
-      letter-spacing:.2px;
-      white-space:nowrap;
-    }
-    .logo{
-      width:38px; height:38px;
-      border-radius:12px;
-      background: conic-gradient(from 210deg, var(--blue), var(--white), var(--orange), var(--blue));
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      display:grid; place-items:center;
-      font-weight: 950;
-    }
-    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-    nav a{
-      text-decoration:none;
-      padding:10px 12px;
-      border-radius:999px;
-      font-weight: 800;
-      font-size: 14px;
-      color: rgba(11,27,42,.78);
-      transition: background .15s ease;
-    }
-    nav a:hover{background: rgba(63,178,255,.14)}
-
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 14px;
-      border-radius:999px;
-      border: 1px solid var(--border);
-      background: var(--white);
-      font-weight: 900;
-      text-decoration:none;
-      box-shadow: 0 10px 22px rgba(11,27,42,.10);
-      transition: transform .15s ease, opacity .15s ease;
-    }
-    .btn:hover{transform: translateY(-1px); opacity:.95}
-    .btn.blue{background: var(--blue); color: var(--white); border-color: rgba(0,0,0,0)}
-    .btn.orange{background: var(--orange); color: var(--white); border-color: rgba(0,0,0,0)}
-
-    /* Sections */
-    section{padding:54px 0}
-    .section-title{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-bottom:16px}
-    h1{margin:0;font-size: clamp(36px, 4.6vw, 56px);letter-spacing:-.6px}
-    h2{margin:0;font-size: 28px;letter-spacing:-.3px}
-    p{margin:0}
-    .sub{color: var(--muted);max-width:75ch}
-
-    /* Layout grids */
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-
-    /* Cards with balanced 1:1:1 look */
-    .card{
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      padding:18px;
-      background:
-        linear-gradient(135deg,
-          rgba(63,178,255,.22) 0%,
-          rgba(255,255,255,.85) 50%,
-          rgba(255,138,61,.18) 100%
-        );
-    }
-    .card.white{
-      background: rgba(255,255,255,.92);
-    }
-    .card.blue{
-      background: linear-gradient(135deg, rgba(63,178,255,.28), rgba(255,255,255,.78));
-    }
-    .card.orange{
-      background: linear-gradient(135deg, rgba(255,138,61,.26), rgba(255,255,255,.78));
-    }
-
-    /* Hero */
-    .hero{
-      padding:62px 0 20px;
-    }
-    .hero-wrap{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:14px;
-      align-items:stretch;
-    }
-    .pill{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.75);
-      font-weight: 850;
-      color: rgba(11,27,42,.75);
-      width: fit-content;
-    }
-    .dots{
-      display:flex;gap:6px;align-items:center
-    }
-    .dot{width:10px;height:10px;border-radius:999px}
-    .dot.blue{background:var(--blue)}
-    .dot.white{background:var(--white);border:1px solid var(--border)}
-    .dot.orange{background:var(--orange)}
-    .lead{margin-top:12px;color: var(--muted);max-width:65ch}
-    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-
-    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
-    .stat{
-      border:1px solid var(--border);
-      border-radius: 16px;
-      padding:12px;
-      background: rgba(255,255,255,.82);
-    }
-    .stat .k{font-weight: 950}
-    .stat .t{color: var(--muted); font-size: 13px; margin-top: 3px}
-
-    /* Team */
-    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .profile{display:flex;gap:12px;align-items:flex-start}
-    .avatar{
-      width:56px;height:56px;border-radius:18px;
-      border:1px solid var(--border);
-      background: conic-gradient(from 225deg, rgba(63,178,255,.95), rgba(255,255,255,1), rgba(255,138,61,.95));
-      display:grid;place-items:center;
-      font-weight: 950;
-      color: rgba(11,27,42,.85);
-      flex: 0 0 auto;
-    }
-    .name{margin:0;font-weight:950;font-size:16px}
-    .role{margin:2px 0 10px;color:var(--muted);font-size:13.5px;font-weight:800}
-
-    .tags{display:flex;flex-wrap:wrap;gap:8px}
-    .tag{
-      padding:6px 10px;border-radius:999px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.86);
-      font-size:12.5px;
-      font-weight:850;
-      color: rgba(11,27,42,.85);
-    }
-    .qual-title{margin:12px 0 6px;font-weight:950}
-    .qual-list{margin:0;padding-left:18px;color: var(--muted)}
-    .qual-list li{margin:4px 0}
-
-    /* Contact blocks */
-    .contact-grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
-    .mono{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 13px;
-      color: rgba(11,27,42,.80);
-      word-break: break-word;
-    }
-
-    footer{
-      padding:30px 0 44px;
-      border-top: 1px solid var(--border);
-      background: rgba(255,255,255,.70);
-      color: rgba(11,27,42,.70);
-    }
-
-    /* Mobile */
-    @media (max-width: 900px){
-      .hero-wrap{grid-template-columns:1fr}
-      .grid-3,.grid-2,.team-grid,.contact-grid{grid-template-columns:1fr}
-      nav ul{gap:6px}
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <div class="container">
-      <div class="nav">
-        <a class="brand" href="#top">
-          <div class="logo">AN</div>
-          <span>Auckland Non Profit</span>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          <span class="brand-text">
+            <span class="brand-name">Auckland Tutoring</span>
+            <span class="brand-tag">Student-led • Non-profit</span>
+          </span>
         </a>
-        <nav aria-label="insert later">
-          <ul>
-            <li><a href="#about">insert later</a></li>
-            <li><a href="#programmes">insert later</a></li>
-            <li><a href="#team">insert later</a></li>
-            <li><a href="#contact">insert later</a></li>
+
+        <nav class="nav" aria-label="Primary">
+          <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+            <span class="sr-only">Open menu</span>
+            ☰
+          </button>
+          <ul class="nav-menu" id="navMenu">
+            <li><a href="#about">About</a></li>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#team">Tutors</a></li>
+            <li><a href="#contact" class="button small">Contact</a></li>
           </ul>
         </nav>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main id="top">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-wrap">
-          <div class="card white">
-            <div class="pill">
-              <span class="dots">
-                <span class="dot blue"></span>
-                <span class="dot white"></span>
-                <span class="dot orange"></span>
-              </span>
-              <span>insert later</span>
-            </div>
-
-            <h1 style="margin-top:14px;">insert later</h1>
-            <p class="lead">insert later</p>
+    <main id="main">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="pill">Auckland • Primary to Intermediate</p>
+            <h1>Out-of-school learning, made more accessible.</h1>
+            <p class="lead">
+              We’re a student-led non-profit connecting younger students with friendly, consistent tutors
+              in a range of subjects — from core learning to enrichment.
+            </p>
 
             <div class="hero-actions">
-              <a class="btn blue" href="#contact">insert later</a>
-              <a class="btn orange" href="#team">insert later</a>
-              <a class="btn" href="#about">insert later</a>
+              <a class="button" href="#contact">Request tutoring</a>
+              <a class="button ghost" href="#team">Meet our tutors</a>
             </div>
 
-            <p style="margin-top:14px;color:var(--muted);font-weight:800;">insert later</p>
-          </div>
-
-          <div class="card">
-            <h2 style="margin-bottom:10px;">insert later</h2>
-            <div class="stats">
-              <div class="stat">
-                <div class="k">insert later</div>
-                <div class="t">insert later</div>
+            <div class="hero-stats" role="list" aria-label="Highlights">
+              <div class="stat" role="listitem">
+                <div class="stat-num">9</div>
+                <div class="stat-label">Tutors & co-founders</div>
               </div>
-              <div class="stat">
-                <div class="k">insert later</div>
-                <div class="t">insert later</div>
+              <div class="stat" role="listitem">
+                <div class="stat-num">Auckland</div>
+                <div class="stat-label">Local support</div>
               </div>
-              <div class="stat">
-                <div class="k">insert later</div>
-                <div class="t">insert later</div>
-              </div>
-              <div class="stat">
-                <div class="k">insert later</div>
-                <div class="t">insert later</div>
+              <div class="stat" role="listitem">
+                <div class="stat-num">Many</div>
+                <div class="stat-label">Subjects offered</div>
               </div>
             </div>
-            <p style="margin-top:12px;color:var(--muted);font-weight:800;">insert later</p>
+          </div>
+
+          <div class="hero-card" aria-label="What we offer">
+            <h2 class="h3">What we offer</h2>
+            <ul class="checklist">
+              <li>Primary & intermediate tutoring</li>
+              <li>Homework help + study skills</li>
+              <li>Extension (chess, music, languages)</li>
+              <li>Student-friendly approach</li>
+            </ul>
+
+            <div class="callout">
+              <p class="callout-title">Our focus</p>
+              <p class="callout-text">
+                Some students in New Zealand can’t access out-of-school learning support.
+                We’re here to help reduce that gap — one session at a time.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>insert later</h2>
-            <p class="sub">insert later</p>
+      <!-- ABOUT -->
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-head">
+            <h2>About us</h2>
+            <p>
+              We’re a student-led organisation based in Auckland. Our real-world issue is simple:
+              <strong>not every student can access extra learning outside school</strong>.
+              We provide tutoring across multiple subjects to support confidence, skill-building, and curiosity.
+            </p>
+          </div>
+
+          <div class="cards">
+            <article class="card">
+              <h3>Our mission</h3>
+              <p>
+                Make out-of-school support easier to access for primary to intermediate learners
+                through a friendly, consistent tutoring experience.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3>Our values</h3>
+              <ul class="bullets">
+                <li>Kindness + patience</li>
+                <li>Clear explanations</li>
+                <li>Confidence-building</li>
+                <li>Learning that feels possible</li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <h3>Where we work</h3>
+              <p>
+                Auckland-based. Sessions can be arranged in agreed safe public spaces
+                (e.g., libraries) or online — depending on what families prefer.
+              </p>
+              <p class="muted tiny">
+                (You can edit this later to match your real policy.)
+              </p>
+            </article>
           </div>
         </div>
+      </section>
 
-        <div class="grid-2">
-          <div class="card blue">
-            <h3 style="margin:0 0 8px;">insert later</h3>
-            <p class="sub">insert later</p>
+      <!-- HOW IT WORKS -->
+      <section class="section alt" id="how">
+        <div class="container">
+          <div class="section-head">
+            <h2>How it works</h2>
+            <p>Simple steps to get started.</p>
           </div>
-          <div class="card orange">
-            <h3 style="margin:0 0 8px;">insert later</h3>
-            <p class="sub">insert later</p>
-          </div>
-        </div>
 
-        <div class="grid-3" style="margin-top:14px;">
-          <div class="card white">
-            <h3 style="margin:0 0 8px;">insert later</h3>
-            <p class="sub">insert later</p>
-          </div>
-          <div class="card white">
-            <h3 style="margin:0 0 8px;">insert later</h3>
-            <p class="sub">insert later</p>
-          </div>
-          <div class="card white">
-            <h3 style="margin:0 0 8px;">insert later</h3>
-            <p class="sub">insert later</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROGRAMMES -->
-    <section id="programmes">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>insert later</h2>
-            <p class="sub">insert later</p>
-          </div>
-        </div>
-
-        <div class="grid-3">
-          <div class="card white">
-            <h3 style="margin:0 0 8px;">insert later</h3>
-            <p class="sub">insert later</p>
-          </div>
-          <div class="card white">
-            <h3 style="margin:0 0 8px;">insert later</h3>
-            <p class="sub">insert later</p>
-          </div>
-          <div class="card white">
-            <h3 style="margin:0 0 8px;">insert later</h3>
-            <p class="sub">insert later</p>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:14px;">
-          <h3 style="margin:0 0 8px;">insert later</h3>
-          <p class="sub">insert later</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- TEAM -->
-    <section id="team">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>insert later</h2>
-            <p class="sub">insert later</p>
-          </div>
-          <a class="btn blue" href="#contact">insert later</a>
-        </div>
-
-        <div class="team-grid">
-
-          <!-- AARNA -->
-          <div class="card white">
-            <div class="profile">
-              <div class="avatar">AA</div>
+          <ol class="steps">
+            <li>
+              <div class="step-num">1</div>
               <div>
-                <p class="name">Aarna</p>
-                <p class="role">insert later</p>
-                <div class="tags">
-                  <span class="tag">Tech</span>
-                  <span class="tag">Science</span>
-                </div>
-                <div class="qual-title">My Qualifications</div>
-                <ul class="qual-list">
-                  <li>insert later</li>
-                  <li>insert later</li>
-                  <li>insert later</li>
-                </ul>
+                <h3>Tell us what you need</h3>
+                <p>Choose subjects, year level, and preferred format (online / in-person).</p>
               </div>
-            </div>
-          </div>
-
-          <!-- ALYSSA -->
-          <div class="card white">
-            <div class="profile">
-              <div class="avatar">AL</div>
+            </li>
+            <li>
+              <div class="step-num">2</div>
               <div>
-                <p class="name">Alyssa</p>
-                <p class="role">insert later</p>
-                <div class="tags">
-                  <span class="tag">Chess</span>
-                  <span class="tag">Music Theory</span>
-                  <span class="tag">French</span>
-                  <span class="tag">Physics</span>
-                </div>
-                <div class="qual-title">My Qualifications</div>
-                <ul class="qual-list">
-                  <li>insert later</li>
-                  <li>insert later</li>
-                  <li>insert later</li>
-                </ul>
+                <h3>We match you with a tutor</h3>
+                <p>We pair learners with a tutor whose subjects and style fit best.</p>
               </div>
-            </div>
-          </div>
-
-          <!-- BELLA -->
-          <div class="card white">
-            <div class="profile">
-              <div class="avatar">BE</div>
+            </li>
+            <li>
+              <div class="step-num">3</div>
               <div>
-                <p class="name">Bella</p>
-                <p class="role">insert later</p>
-                <div class="tags">
-                  <span class="tag">Math (competition)</span>
-                  <span class="tag">Chess</span>
-                </div>
-                <div class="qual-title">My Qualifications</div>
-                <ul class="qual-list">
-                  <li>insert later</li>
-                  <li>insert later</li>
-                  <li>insert later</li>
-                </ul>
+                <h3>Start learning</h3>
+                <p>Short, consistent sessions focused on confidence and progress.</p>
               </div>
-            </div>
-          </div>
-
-          <!-- CHERISE -->
-          <div class="card white">
-            <div class="profile">
-              <div class="avatar">CH</div>
-              <div>
-                <p class="name">Cherise</p>
-                <p class="role">insert later</p>
-                <div class="tags">
-                  <span class="tag">Science</span>
-                  <span class="tag">Spanish</span>
-                  <span class="tag">Biology</span>
-                </div>
-                <div class="qual-title">My Qualifications</div>
-                <ul class="qual-list">
-                  <li>insert later</li>
-                  <li>insert later</li>
-                  <li>insert later</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- ISABELLA -->
-          <div class="card white">
-            <div class="profile">
-              <div class="avatar">IS</div>
-              <div>
-                <p class="name">Isabella</p>
-                <p class="role">insert later</p>
-                <div class="tags">
-                  <span class="tag">English</span>
-                  <span class="tag">Math</span>
-                  <span class="tag">Science</span>
-                  <span class="tag">Speech</span>
-                </div>
-                <div class="qual-title">My Qualifications</div>
-                <ul class="qual-list">
-                  <li>insert later</li>
-                  <li>insert later</li>
-                  <li>insert later</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- FIONA -->
-          <div class="card white">
-            <div class="profile">
-              <div class="avatar">FI</div>
-              <div>
-                <p class="name">Fiona</p>
-                <p class="role">insert later</p>
-                <div class="tags">
-                  <span class="tag">Chinese</span>
-                  <span class="tag">History</span>
-                  <span class="tag">English</span>
-                </div>
-                <div class="qual-title">My Qualifications</div>
-                <ul class="qual-list">
-                  <li>insert later</li>
-                  <li>insert later</li>
-                  <li>insert later</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- LISA -->
-          <div class="card white">
-            <div class="profile">
-              <div class="avatar">LI</div>
-              <div>
-                <p class="name">Lisa</p>
-                <p class="role">insert later</p>
-                <div class="tags">
-                  <span class="tag">English</span>
-                  <span class="tag">Speech</span>
-                  <span class="tag">French</span>
-                  <span class="tag">Science</span>
-                </div>
-                <div class="qual-title">My Qualifications</div>
-                <ul class="qual-list">
-                  <li>insert later</li>
-                  <li>insert later</li>
-                  <li>insert later</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- LIZ -->
-          <div class="card white">
-            <div class="profile">
-              <div class="avatar">LZ</div>
-              <div>
-                <p class="name">Liz</p>
-                <p class="role">insert later</p>
-                <div class="tags">
-                  <span class="tag">Science</span>
-                  <span class="tag">Art</span>
-                </div>
-                <div class="qual-title">My Qualifications</div>
-                <ul class="qual-list">
-                  <li>insert later</li>
-                  <li>insert later</li>
-                  <li>insert later</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- NATALIE -->
-          <div class="card white">
-            <div class="profile">
-              <div class="avatar">NA</div>
-              <div>
-                <p class="name">Natalie</p>
-                <p class="role">insert later</p>
-                <div class="tags">
-                  <span class="tag">Drama</span>
-                  <span class="tag">Biology</span>
-                  <span class="tag">Admin</span>
-                </div>
-                <div class="qual-title">My Qualifications</div>
-                <ul class="qual-list">
-                  <li>insert later</li>
-                  <li>insert later</li>
-                  <li>insert later</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
+            </li>
+          </ol>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- CONTACT / EMAILS -->
-    <section id="contact">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>insert later</h2>
-            <p class="sub">insert later</p>
+      <!-- TEAM -->
+      <section class="section" id="team">
+        <div class="container">
+          <div class="section-head">
+            <h2>Meet our tutors</h2>
+            <p>
+              Click a profile to view subjects, an “About me” section, and a spot for qualifications
+              (you can fill these in later).
+            </p>
+          </div>
+
+          <div class="filters" aria-label="Tutor filters">
+            <label class="field">
+              <span class="field-label">Search</span>
+              <input id="searchInput" type="search" placeholder="Try: chess, English, biology…" />
+            </label>
+
+            <label class="field">
+              <span class="field-label">Subject</span>
+              <select id="subjectSelect">
+                <option value="">All subjects</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="grid" id="tutorGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section alt" id="contact">
+        <div class="container">
+          <div class="section-head">
+            <h2>Contact</h2>
+            <p>
+              Send a request and we’ll get back to you. (This uses email — no backend needed.)
+            </p>
+          </div>
+
+          <div class="contact-grid">
+            <form class="card form" id="contactForm">
+              <div class="form-row">
+                <label>
+                  Name
+                  <input name="name" required placeholder="Parent/guardian or student name" />
+                </label>
+                <label>
+                  Email
+                  <input name="email" type="email" required placeholder="you@example.com" />
+                </label>
+              </div>
+
+              <div class="form-row">
+                <label>
+                  Year level
+                  <input name="yearLevel" placeholder="e.g., Year 5, Year 7" />
+                </label>
+                <label>
+                  Subjects
+                  <input name="subjects" placeholder="e.g., maths + reading" />
+                </label>
+              </div>
+
+              <label>
+                Message
+                <textarea
+                  name="message"
+                  rows="5"
+                  placeholder="Tell us what support you’re looking for, availability, and preferred format."
+                ></textarea>
+              </label>
+
+              <button class="button" type="submit">Create email</button>
+              <p class="muted tiny">
+                Tip: You can change the destination email in <code>script.js</code>.
+              </p>
+            </form>
+
+            <aside class="card">
+              <h3>Quick info</h3>
+              <ul class="bullets">
+                <li>Based in Auckland</li>
+                <li>Primary to intermediate support</li>
+                <li>Multiple subjects and enrichment options</li>
+              </ul>
+
+              <div class="divider"></div>
+
+              <h3>Safety note</h3>
+              <p class="muted">
+                For in-person sessions, we recommend meeting in public spaces like libraries
+                and ensuring a parent/guardian is aware and nearby.
+              </p>
+            </aside>
           </div>
         </div>
+      </section>
+    </main>
 
-        <div class="contact-grid">
-          <div class="card white">
-            <h3 style="margin:0 0 8px;">insert later</h3>
-            <p class="sub">insert later</p>
-            <div class="mono" style="margin-top:10px;">insert later</div>
-          </div>
-
-          <div class="card white">
-            <h3 style="margin:0 0 8px;">insert later</h3>
-            <p class="sub">insert later</p>
-            <div class="mono" style="margin-top:10px;">insert later</div>
-          </div>
-
-          <div class="card white">
-            <h3 style="margin:0 0 8px;">insert later</h3>
-            <p class="sub">insert later</p>
-            <div class="mono" style="margin-top:10px;">insert later</div>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:14px;">
-          <h3 style="margin:0 0 8px;">insert later</h3>
-          <p class="sub">insert later</p>
-          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn blue" href="mailto:insert later">insert later</a>
-            <a class="btn orange" href="mailto:insert later">insert later</a>
-            <a class="btn" href="mailto:insert later">insert later</a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <footer>
-      <div class="container">
-        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;">
-          <div style="font-weight:900;">Auckland Non Profit</div>
-          <div style="font-weight:800;">insert later</div>
-        </div>
-        <div style="margin-top:10px;font-size:13px;">insert later</div>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> Auckland Tutoring (Student-led Non-profit)</p>
+        <p class="muted tiny">
+          Built on GitHub Pages • Update text anytime in <code>index.html</code>
+        </p>
       </div>
     </footer>
-  </main>
-</body>
+
+    <!-- PROFILE MODAL -->
+    <div class="modal-backdrop" id="modalBackdrop" hidden></div>
+
+    <div class="modal" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+      <div class="modal-header">
+        <div>
+          <h2 class="h3" id="modalTitle">Tutor</h2>
+          <p class="muted" id="modalRole">Tutor & Co-founder</p>
+        </div>
+        <button class="icon-button" id="modalClose" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="pill-row" id="modalSubjects"></div>
+
+        <div class="modal-sections">
+          <section class="modal-section">
+            <h3>About me</h3>
+            <p class="muted" id="modalAbout">
+              Add a short intro here (teaching style, what you enjoy, why you joined).
+            </p>
+          </section>
+
+          <section class="modal-section">
+            <h3>My qualifications</h3>
+            <ul class="bullets muted" id="modalQualifications">
+              <li>Add qualifications, awards, experience, or leadership roles here.</li>
+              <li>You can replace these bullets later.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="button ghost" id="copySubjectsBtn" type="button">Copy subjects</button>
+        <a class="button" href="#contact" id="contactLink">Request this tutor</a>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
